@@ -155,7 +155,7 @@ graph TD
     classDef phys fill:#064e3b,stroke:#10b981,color:#fff,stroke-width:3px,rx:5px,ry:5px;
     classDef out fill:#881337,stroke:#f43f5e,color:#fff,stroke-width:4px,rx:8px,ry:8px,font-weight:bold;
 
-    T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Camera<br><i>Grounding DINO + SAM 2</i>"]:::prep
+    T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Video<br><i>Grounding DINO + SAM 2</i>"]:::prep
     
     S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
     S -- "Stable Frames" --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
