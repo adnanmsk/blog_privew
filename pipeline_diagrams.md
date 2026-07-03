@@ -1,11 +1,11 @@
 # Pipeline Diagram Options
 
-Here are upgraded, premium-styled Mermaid diagrams for the Bat Swing Plane Pipeline. They use custom colors, rounded corners, shapes, and emojis to look significantly better than the default basic layout! 
+Here are upgraded, premium-styled Mermaid diagrams for the Bat Swing Plane Pipeline. They use custom colors, rounded corners, and shapes to look significantly better than the default basic layout! 
 
 *(Note: GitHub Markdown does not support standard CSS keyframe animations inside SVGs for security reasons. However, I have applied the `stroke-dasharray` technique which gives the connecting lines a dashed, "moving data" look in supported markdown renderers!)*
 
 ### Option 1: The "Premium" Dark Mode Flow
-*Features custom hex colors, rounded corners, drop shadows, and emojis to look like a modern system architecture.*
+*Features custom hex colors, rounded corners, and drop shadows to look like a modern system architecture.*
 
 ```mermaid
 flowchart TD
@@ -15,34 +15,34 @@ flowchart TD
     classDef data fill:#003049,stroke:#669bbc,stroke-width:2px,color:#fff,rx:15px,ry:15px;
     classDef output fill:#006400,stroke:#38b000,stroke-width:3px,color:#fff,rx:10px,ry:10px,font-weight:bold;
 
-    Vid[/"🎥 Raw Video Input"/]:::input --> S1
+    Vid[/"Raw Video Input"/]:::input --> S1
     
-    subgraph Preprocessing
-    S1("✂️ Stage 1: YOLO Trim"):::stage --> Clip[("🎞️ 1-Sec Action Clip")]:::data
-    Clip --> S2("⚖️ Stage 2: Pitch Stabilization"):::stage
-    S2 --> Stable[("📐 Stable Frames")]:::data
+    subgraph Pre-Processing
+    S1("1. Trim Video (YOLO11x + Pose)"):::stage --> Clip[("1-Sec Action Clip")]:::data
+    Clip --> S2("2. Stabilize Camera (Grounding DINO + SAM 2)"):::stage
+    S2 --> Stable[("Clean Frames")]:::data
     end
     
     Stable --> S3A
     Stable --> S3B
 
-    subgraph Dual AI Extraction
-    S3A{"👁️ Stage 3a: Depth Models"}:::stage
-    S3B{"🤖 Stage 3b: SAM 2 Models"}:::stage
-    S3A --> ZData[("📊 Z-Axis Depth Maps")]:::data
-    S3B --> Mask[("🦇 Clean Bat Masks")]:::data
-    Mask --> S4("📏 Stage 4: PCA Geometry"):::stage
-    S4 --> XYData[("📍 X,Y Tip & Handle")]:::data
+    subgraph AI Inference
+    S3A{"3a. Depth Maps (Depth Anything V2)"}:::stage
+    S3B{"3b. Bat Mask (SAM 3.1)"}:::stage
+    S3A --> ZData[("Z-Depth Maps")]:::data
+    S3B --> Mask[("X,Y Pixels")]:::data
+    Mask --> S4("4. 3D Keypoints (PCA + Wrists)"):::stage
+    S4 --> XYData[("Raw 3D Points")]:::data
     end
     
     ZData --> S5
     XYData --> S5
 
-    subgraph 3D Engine
-    S5(("🧠 Stage 5: 3D Fusion & Kalman")):::stage
+    subgraph Physics & Fusion
+    S5(("5. 3D Fusion (Kalman RTS)")):::stage
     end
     
-    S5 ===> Out[/"🚀 Final 3D Trajectory Output"\]:::output
+    S5 ===> Out[/"6. Render Bat Swing Plane (Matplotlib + FFmpeg)"\]:::output
     
     %% Dashed Flow Lines
     linkStyle 0,1,2,3,4,5,6,7,8,9,10,11 stroke:#fff,stroke-width:2px,stroke-dasharray: 5 5;
@@ -61,17 +61,17 @@ flowchart LR
     classDef blue fill:#001233,stroke:#00f5d4,stroke-width:2px,color:#fff;
     classDef green fill:#002910,stroke:#38b000,stroke-width:2px,color:#fff;
 
-    A[/"📱 Raw Video"/]:::pink --> B("🤖 YOLO Trim"):::blue
-    B --> C("⚖️ Homography"):::blue
+    A[/"Raw Video"/]:::pink --> B("1. YOLO11x + Pose"):::blue
+    B --> C("2. Grounding DINO + SAM 2"):::blue
     
-    C --> D{"👁️ Depth Maps"}:::pink
-    C --> E{"🦇 SAM 2"}:::pink
+    C --> D{"3a. Depth Anything V2"}:::pink
+    C --> E{"3b. SAM 3.1"}:::pink
     
-    D --> F("📏 PCA Axis"):::blue
+    D --> F("4. PCA + Wrists"):::blue
     E --> F
     
-    F --> G(("🧠 3D Fusion")):::green
-    G ===> H[/"🚀 3D Trajectory"/]:::green
+    F --> G(("5. Kalman RTS")):::green
+    G ===> H[/"6. Matplotlib + FFmpeg"/]:::green
     
     %% Animated-looking dashed lines
     linkStyle 0,1,2,3,4,5,6 stroke:#fff,stroke-width:2px,stroke-dasharray: 5 5;
@@ -90,17 +90,17 @@ flowchart LR
     classDef blue fill:#001233,stroke:#00f5d4,stroke-width:2px,color:#fff;
     classDef green fill:#002910,stroke:#38b000,stroke-width:2px,color:#fff;
 
-    A[/"📱 Raw Mobile Video"/]:::pink --> B("✂️ YOLO Trim<br><i>(Action Segments)</i>"):::blue
-    B --> C("⚖️ Homography<br><i>(Pitch Stabilization)</i>"):::blue
+    A[/"Raw Mobile Video"/]:::pink --> B("1. Trim Video<br><i>(YOLO11x + Pose)</i>"):::blue
+    B --> C("2. Stabilize Camera<br><i>(Grounding DINO + SAM 2)</i>"):::blue
     
-    C --> D{"👁️ Depth Maps<br><i>(DepthAnythingV2)</i>"}:::pink
-    C --> E{"🦇 SAM 2<br><i>(Bat vs Wicket)</i>"}:::pink
+    C --> D{"3a. Depth Maps<br><i>(Depth Anything V2)</i>"}:::pink
+    C --> E{"3b. Bat Mask<br><i>(SAM 3.1)</i>"}:::pink
     
-    D --> F("📏 PCA Axis<br><i>(Sub-Pixel Geometry)</i>"):::blue
+    D --> F("4. 3D Keypoints<br><i>(PCA + Wrists)</i>"):::blue
     E --> F
     
-    F --> G(("🧠 3D Fusion<br><i>(Kalman Filter)</i>")):::green
-    G ===> H[/"🚀 3D Trajectory<br><i>(Matplotlib + FFmpeg)</i>"/]:::green
+    F --> G(("5. 3D Fusion<br><i>(Kalman RTS)</i>")):::green
+    G ===> H[/"6. Render Trajectory<br><i>(Matplotlib + FFmpeg)</i>"/]:::green
     
     %% Animated-looking dashed lines
     linkStyle 0,1,2,3,4,5,6 stroke:#fff,stroke-width:2px,stroke-dasharray: 8 4;
@@ -110,7 +110,7 @@ flowchart LR
 ---
 
 ### Option 4: The "Original Diagram" Upgraded
-*This layout keeps the exact same structure as the original diagram in your blog draft (grouped by Pre-Processing, AI Inference, Physics), but significantly upgrades the visuals with bright colors, emojis, 3D shapes, and dashed flow paths!*
+*This layout keeps the exact same structure as the original diagram in your blog draft (grouped by Pre-Processing, AI Inference, Physics), but significantly upgrades the visuals with bright colors, 3D shapes, and dashed flow paths (no emojis).*
 
 ```mermaid
 graph TD
@@ -121,21 +121,21 @@ graph TD
     classDef out fill:#ff7675,stroke:#d63031,color:#000,stroke-width:4px,rx:15px,ry:15px,font-weight:bold;
 
     subgraph Pre-Processing
-        T("✂️ 1. Trim Video<br><i>YOLOv8 + Pose</i>"):::prep --> S("⚖️ 2. Stabilize Camera<br><i>Homography</i>"):::prep
+        T("1. Trim Video<br><i>YOLO11x + Pose</i>"):::prep --> S("2. Stabilize Camera<br><i>Grounding DINO + SAM 2</i>"):::prep
     end
     
     subgraph AI Inference
-        S -- "Clean Frames" --> D{"👁️ 3a. Depth Maps<br><i>Depth Anything V2</i>"}:::infer
-        S -- "Clean Frames" --> Seg{"🦇 3b. Bat Mask<br><i>SAM 2 Subtraction</i>"}:::infer
+        S -- "Clean Frames" --> D{"3a. Depth Maps<br><i>Depth Anything V2</i>"}:::infer
+        S -- "Clean Frames" --> Seg{"3b. Bat Mask<br><i>SAM 3.1</i>"}:::infer
     end
     
     subgraph Physics & Fusion
-        D -- "Z-Depth" --> K("📏 4. 3D Keypoints<br><i>PCA + Wrists</i>"):::phys
+        D -- "Z-Depth" --> K("4. 3D Keypoints<br><i>PCA + Wrists</i>"):::phys
         Seg -- "X, Y Pixels" --> K
-        K -- "Raw 3D Points" --> F(("🧠 5. 3D Fusion<br><i>Kalman Smoothing</i>")):::phys
+        K -- "Raw 3D Points" --> F(("5. 3D Fusion<br><i>Kalman RTS</i>")):::phys
     end
     
-    F == "Smooth Trajectory" === R[/"🚀 6. Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"/]:::out
+    F == "Smooth Trajectory" === R[/"6. Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"/]:::out
 
     %% Animated Dashed Flow Lines
     linkStyle 0,1,2,3,4,5 stroke:#fff,stroke-width:2px,stroke-dasharray: 5 5;
