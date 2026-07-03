@@ -159,9 +159,9 @@ To find these lines without training a custom model, we use **Grounding DINO**â€
 
 Even though Grounding DINO wasn't trained specifically on cricket pitches, it locates the white lines on the ground. Once it finds them in a single "golden frame," we feed those locations into **SAM 2** (Segment Anything Model 2). SAM 2 is designed for video; we give it a few points on the lines, and it automatically tracks and outlines the shapes of those crease lines forward and backward through the entire clip.
 
-![Pitch Stabilization Bounding Box](assets/stage1_pitch_detected.gif)
+![Pitch Stabilization Bounding Box](assets/stage2_pitch_detected.gif)
 
-[Watch the high-res Pitch Stabilization Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage1_pitch_detected.mp4)
+[Watch the high-res Pitch Stabilization Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage2_pitch_detected.mp4)
 
 ### Warping the Coordinate Space
 
