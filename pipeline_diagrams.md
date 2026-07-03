@@ -2,7 +2,7 @@
 
 Here are upgraded, premium-styled Mermaid diagrams for the Bat Swing Plane Pipeline. They use custom colors, rounded corners, shapes, and emojis to look significantly better than the default basic layout! 
 
-*(Note: GitHub Markdown does not support animated SVGs or animated Mermaid diagrams for security reasons. If you want a truly animated diagram, you would need to export a GIF from a tool like Canva or Figma. However, these styled diagrams are the absolute best looking static ones you can get purely through code!)*
+*(Note: GitHub Markdown does not support standard CSS keyframe animations inside SVGs for security reasons. However, I have applied the `stroke-dasharray` technique which gives the connecting lines a dashed, "moving data" look in supported markdown renderers!)*
 
 ### Option 1: The "Premium" Dark Mode Flow
 *Features custom hex colors, rounded corners, drop shadows, and emojis to look like a modern system architecture.*
@@ -43,6 +43,10 @@ flowchart TD
     end
     
     S5 ===> Out[/"🚀 Final 3D Trajectory Output"\]:::output
+    
+    %% Dashed Flow Lines
+    linkStyle 0,1,2,3,4,5,6,7,8,9,10,11 stroke:#fff,stroke-width:2px,stroke-dasharray: 5 5;
+    linkStyle 12 stroke:#38b000,stroke-width:4px;
 ```
 
 ---
@@ -56,7 +60,6 @@ flowchart LR
     classDef pink fill:#2d001a,stroke:#ff007f,stroke-width:2px,color:#fff;
     classDef blue fill:#001233,stroke:#00f5d4,stroke-width:2px,color:#fff;
     classDef green fill:#002910,stroke:#38b000,stroke-width:2px,color:#fff;
-    classDef textNode fill:none,stroke:none,color:#fff,font-weight:bold;
 
     A[/"📱 Raw Video"/]:::pink --> B("🤖 YOLO Trim"):::blue
     B --> C("⚖️ Homography"):::blue
@@ -70,7 +73,71 @@ flowchart LR
     F --> G(("🧠 3D Fusion")):::green
     G ===> H[/"🚀 3D Trajectory"/]:::green
     
-    %% Animated-looking dashed lines (some renderers support this)
+    %% Animated-looking dashed lines
     linkStyle 0,1,2,3,4,5,6 stroke:#fff,stroke-width:2px,stroke-dasharray: 5 5;
     linkStyle 7 stroke:#00f5d4,stroke-width:4px;
+```
+
+---
+
+### Option 3: The "Cyberpunk Detailed" Horizontal Layout
+*An upgraded version of Option 2 that explicitly lists the technical models used at each step, ensuring perfect context for the pipeline while maintaining the premium neon aesthetic.*
+
+```mermaid
+flowchart LR
+    %% Custom Styles
+    classDef pink fill:#2d001a,stroke:#ff007f,stroke-width:2px,color:#fff;
+    classDef blue fill:#001233,stroke:#00f5d4,stroke-width:2px,color:#fff;
+    classDef green fill:#002910,stroke:#38b000,stroke-width:2px,color:#fff;
+
+    A[/"📱 Raw Mobile Video"/]:::pink --> B("✂️ YOLO Trim<br><i>(Action Segments)</i>"):::blue
+    B --> C("⚖️ Homography<br><i>(Pitch Stabilization)</i>"):::blue
+    
+    C --> D{"👁️ Depth Maps<br><i>(DepthAnythingV2)</i>"}:::pink
+    C --> E{"🦇 SAM 2<br><i>(Bat vs Wicket)</i>"}:::pink
+    
+    D --> F("📏 PCA Axis<br><i>(Sub-Pixel Geometry)</i>"):::blue
+    E --> F
+    
+    F --> G(("🧠 3D Fusion<br><i>(Kalman Filter)</i>")):::green
+    G ===> H[/"🚀 3D Trajectory<br><i>(Matplotlib + FFmpeg)</i>"/]:::green
+    
+    %% Animated-looking dashed lines
+    linkStyle 0,1,2,3,4,5,6 stroke:#fff,stroke-width:2px,stroke-dasharray: 8 4;
+    linkStyle 7 stroke:#00f5d4,stroke-width:4px,stroke-dasharray: 10 5;
+```
+
+---
+
+### Option 4: The "Original Diagram" Upgraded
+*This layout keeps the exact same structure as the original diagram in your blog draft (grouped by Pre-Processing, AI Inference, Physics), but significantly upgrades the visuals with bright colors, emojis, 3D shapes, and dashed flow paths!*
+
+```mermaid
+graph TD
+    %% Custom Premium Styles
+    classDef prep fill:#ff9f43,stroke:#c87b32,color:#000,stroke-width:3px,rx:10px,ry:10px;
+    classDef infer fill:#0abde3,stroke:#0984e3,color:#000,stroke-width:3px,rx:10px,ry:10px;
+    classDef phys fill:#1dd1a1,stroke:#10ac84,color:#000,stroke-width:3px,rx:10px,ry:10px;
+    classDef out fill:#ff7675,stroke:#d63031,color:#000,stroke-width:4px,rx:15px,ry:15px,font-weight:bold;
+
+    subgraph Pre-Processing
+        T("✂️ 1. Trim Video<br><i>YOLOv8 + Pose</i>"):::prep --> S("⚖️ 2. Stabilize Camera<br><i>Homography</i>"):::prep
+    end
+    
+    subgraph AI Inference
+        S -- "Clean Frames" --> D{"👁️ 3a. Depth Maps<br><i>Depth Anything V2</i>"}:::infer
+        S -- "Clean Frames" --> Seg{"🦇 3b. Bat Mask<br><i>SAM 2 Subtraction</i>"}:::infer
+    end
+    
+    subgraph Physics & Fusion
+        D -- "Z-Depth" --> K("📏 4. 3D Keypoints<br><i>PCA + Wrists</i>"):::phys
+        Seg -- "X, Y Pixels" --> K
+        K -- "Raw 3D Points" --> F(("🧠 5. 3D Fusion<br><i>Kalman Smoothing</i>")):::phys
+    end
+    
+    F == "Smooth Trajectory" === R[/"🚀 6. Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"/]:::out
+
+    %% Animated Dashed Flow Lines
+    linkStyle 0,1,2,3,4,5 stroke:#fff,stroke-width:2px,stroke-dasharray: 5 5;
+    linkStyle 6 stroke:#ff7675,stroke-width:4px,stroke-dasharray: 10 5;
 ```
