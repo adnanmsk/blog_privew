@@ -412,7 +412,7 @@ By rendering from three different camera angles (e.g., top-down, side-profile, a
   <img src="assets/stage5_3d_trajectory.gif" alt="3D Swing Trajectory Front and Side" width="100%" />
 </p>
 <p align="center">
-  <i>Left: Side View &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Right: Front View</i>
+  <i>Left: Front View &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Right: Side View</i>
 </p>
 
 [Watch the high-res 3D Trajectory Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage5_3d_trajectory.mp4)
