@@ -420,7 +420,7 @@ By rendering from three different camera angles (e.g., top-down, side-profile, a
 ---
 
 
-## Results: 60 Videos "In the Wild"
+## Results: Stress-Testing 60 Real-World Swings
 
 I tested the pipeline on a batch of 60 cricket videos covering a range of shot types—cover drives, pull shots, cuts, flicks, defensive blocks, and lofted shots—from both left-handed and right-handed batsmen. The videos were filmed on standard mobile phones at varying angles and distances.
 
@@ -435,7 +435,7 @@ I tested the pipeline on a batch of 60 cricket videos covering a range of shot t
 | Kalman gap-fills needed | Median 1 frame / video |
 
 > [!NOTE]
-> **The 1 Failure Case:** The single failure occurred on a video shot on a field with no painted crease lines. Because the Stage 2 Pitch Detection relies on finding these high-contrast pitch boundaries to calculate its homography matrix, it couldn't lock the camera in place. This caused the 3D depth map to shake violently and corrupted the trajectory.
+> **The 1 Failure Case:** One video failed because the pitch crease lines were too poorly visible. Without clear boundaries on the ground, the pitch stabilization (Stage 2) couldn't lock the camera in place, causing the 3D trajectory to shake and corrupt.
 
 The pipeline is highly robust, successfully handling:
 * ✅ **Camera Variations:** Behind the bowler, side-on, and slightly elevated angles.
