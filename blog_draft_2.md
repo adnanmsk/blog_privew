@@ -69,7 +69,7 @@ graph TD
         K -- "Raw 3D Points" --> F[5. 3D Fusion<br><i>Kalman RTS</i>]:::phys
     end
     
-    F -- "Smooth Trajectory" --> R([6. Render Output<br><i>Matplotlib + FFmpeg</i>]):::out
+    F -- "Smooth Trajectory" --> R([6. Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>]):::out
 ```
 
 All six models are loaded once (~10 seconds) and reused across every video. There is zero fine-tuning — every model is used off-the-shelf with its pretrained weights.
