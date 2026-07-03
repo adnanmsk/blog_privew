@@ -161,7 +161,7 @@ Even though Grounding DINO wasn't trained specifically on cricket pitches, it lo
 
 ![Pitch Stabilization Bounding Box](assets/stage2_pitch_detected.gif)
 
-[Watch the high-res Pitch Stabilization Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage2_pitch_detected.mp4)
+[Watch the high-res Pitch Detection Bounding Box Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage2_pitch_detected.mp4)
 
 ### Warping the Coordinate Space
 
@@ -185,7 +185,9 @@ out_frame = cv2.warpAffine(frame_copy, M, (1280, 1280))
 
 This mathematical "rubber sheet" transformation normalizes every frame. The camera movement is completely neutralized, and the pitch is locked in place. Any movement left in the video is now the true physical motion of the player and the bat.
 
-<!-- [IMAGE: Before/after — raw shaky frame vs. stabilized frame] -->
+![Final Stabilized Pitch](assets/stage2_stabilized.gif)
+
+[Watch the high-res Final Stabilized Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage2_stabilized.mp4)
 
 ---
 
