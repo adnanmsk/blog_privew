@@ -270,7 +270,14 @@ Finally, we enforce temporal continuity. If multiple blobs survive in a single f
 
 This dual-session approach isn't cricket-specific. It's a general computer vision technique: whenever an AI confuses two similar objects, track both and subtract!
 
-<!-- [IMAGE: Side-by-side — raw bat mask with stumps contamination vs. clean mask after subtraction] -->
+<p align="center">
+  <img src="assets/stage3b_subtraction.gif" alt="SAM Mask Subtraction Trick" width="100%" />
+</p>
+<p align="center">
+  <i>Left: Contaminated Bat Mask &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Center: Wicket Mask &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Right: Final Clean Mask</i>
+</p>
+
+[Watch the high-res 3-Panel Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage3b_subtraction.mp4)
 
 ---
 
