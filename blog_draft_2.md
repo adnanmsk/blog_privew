@@ -135,8 +135,6 @@ This code uses four simple factors to find the batsman:
 
 The track with the highest score is crowned the batsman, and we trim the video to start and end right around their swing. Any brief gaps where the batsman was lost are filled in using linear interpolation (connecting the dots). This trims the clip down to just the ~25 frames of pure action, saving huge amounts of processing time later.
 
-<!-- [IMAGE: Frame timeline showing bat detection confidence, with the selected block highlighted] -->
-
 ---
 
 ## Stage 2: Killing the Camera Shake (Pitch Stabilization)
@@ -319,9 +317,11 @@ The endpoint of the bat's axis that is closest to this grip is classified as the
 
 **The Width Tiebreaker:** What happens if the batsman's hands are blocked from the camera's view? We fall back on a structural rule: a cricket bat's blade is significantly wider than its handle. We count the pixels at both ends of the axis. The end with the higher pixel density is crowned the tip.
 
-Finally, to get sub-pixel accuracy, we don't just use the single furthest pixel. We take the average (center of mass) of the top 15% and bottom 15% of pixels along the axis. This prevents a single jagged, noisy pixel from causing the tracked tip to jitter!
+Finally, to get sub-pixel accuracy, we don't just use the single furthest pixel. We take the average (center of mass) of the top 15% and bottom 15% of pixels along the axis. This prevents a single jagged, noisy pixel from causing the tracked tip to jitter! And that's it! We now have the `(x, y)` pixel coordinates of both the handle and the tip for every single frame of the swing.
 
-<!-- [IMAGE: PCA axis overlaid on bat mask, with tip and handle endpoints marked] -->
+![PCA Handle and Tip Detection](assets/stage4_pca.gif)
+
+[Watch the high-res PCA Detection Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage4_pca.mp4)
 
 ---
 
