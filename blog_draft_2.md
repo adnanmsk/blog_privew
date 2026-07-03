@@ -4,7 +4,9 @@
 
 ---
 
-https://github.com/adnanmsk/blog_privew/raw/main/assets/hero_3d_swing_plane.mp4
+![Hero 3D Swing Plane](assets/hero_3d_swing_plane.mp4)
+
+[Watch the full 3D Swing Plane Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/hero_3d_swing_plane.mp4)
 
 ## Breaking the Hardware Barrier for 3D Swing Analysis
 
