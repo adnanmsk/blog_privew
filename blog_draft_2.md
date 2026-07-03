@@ -4,7 +4,7 @@
 
 ---
 
-<video src="assets/hero_3d_swing_plane.mp4" autoplay loop muted controls="controls" width="100%"></video>
+<video src="https://github.com/adnanmsk/blog_privew/raw/main/assets/hero_3d_swing_plane.mp4" autoplay loop muted controls="controls" width="100%"></video>
 
 ## Breaking the Hardware Barrier for 3D Swing Analysis
 
