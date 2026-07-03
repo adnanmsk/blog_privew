@@ -150,10 +150,10 @@ graph TD
 ```mermaid
 graph TD
     %% Custom Premium Styles
-    classDef prep fill:#ff9f43,stroke:#c87b32,color:#000,stroke-width:3px,rx:5px,ry:5px;
-    classDef infer fill:#0abde3,stroke:#0984e3,color:#000,stroke-width:3px,rx:5px,ry:5px;
-    classDef phys fill:#1dd1a1,stroke:#10ac84,color:#000,stroke-width:3px,rx:5px,ry:5px;
-    classDef out fill:#ff7675,stroke:#d63031,color:#000,stroke-width:4px,rx:8px,ry:8px,font-weight:bold;
+    classDef prep fill:#3b0764,stroke:#a855f7,color:#fff,stroke-width:3px,rx:5px,ry:5px;
+    classDef infer fill:#083344,stroke:#06b6d4,color:#fff,stroke-width:3px,rx:5px,ry:5px;
+    classDef phys fill:#064e3b,stroke:#10b981,color:#fff,stroke-width:3px,rx:5px,ry:5px;
+    classDef out fill:#881337,stroke:#f43f5e,color:#fff,stroke-width:4px,rx:8px,ry:8px,font-weight:bold;
 
     subgraph Pre-Processing
         T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Camera<br><i>Grounding DINO + SAM 2</i>"]:::prep
