@@ -1,32 +1,34 @@
 # 3D Cricket Bat Trajectory: Reconstructing the Swing Trajectory from Unstable 2D Video
 
-*How to reconstruct precise 3D trajectories from shaky, single-camera video by combining deep learning segmentation, relative depth estimation, and physics-based smoothing.*
+*Extracting the precise 3D bat swing plane from a standard 2D video—no sensors, no multi-camera rigs, just AI.*
 
 ---
 
-<!-- [IMAGE: Hero composite — raw video frame on left, 3D trajectory animation on right] -->
+<!-- [IMAGE: Hero composite — raw video frame on left, 3D bat swing plane animation on right] -->
 
-## The Problem with Tracking a Split-Second Swing
+## Breaking the Hardware Barrier for 3D Swing Analysis
 
-When a batsman plays a cover drive, the difference between hitting a boundary and getting caught at slip is a matter of millimeters and a fraction of a second. 
+When analyzing a cricket shot, the most critical piece of data is the **3D bat swing plane**—the exact arc and angle the bat travels through space. Knowing the 3D bat swing plane immediately reveals if a player is slicing the ball, playing across the line, or coming down perfectly straight.
 
-Historically, cricket coaching has relied entirely on the coach's eyes. A coach watches a swing and says, *"Your bat face was slightly open,"* or *"You played across the line."* But human eyes have limits. A typical cricket shot happens in about 150 milliseconds—literally faster than the blink of an eye. It is physically impossible for a coach to see the exact angle or path of the bat in real-time.
+Because a swing happens in about 150 milliseconds, it is impossible for the human eye to track the exact 3D bat swing plane in real-time. To capture it, players rely entirely on specialized hardware:
+- **Smart Sensors:** Players attach physical gyroscopic sensors to the handle of their bats (like StanceBeam or Blast Motion) to record their swing.
+- **Biomechanics Labs:** Complex motion-capture studios use multiple infrared cameras to track reflective stickers pasted onto the bat.
 
-To get accurate data, professional teams use high-end tracking systems. You have probably seen **Hawk-Eye** on TV, which uses multiple cameras set up all around the stadium to track the ball. Other setups use **motion-capture studios** with special infrared cameras that track reflective stickers pasted onto the bat. While these systems are highly accurate, they are incredibly expensive, require complex setups with many cameras, and can only be used in permanent, specialized facilities. 
+While these hardware solutions are accurate, they are incredibly expensive, confined to specialized facilities, and intrusive—attaching a physical sensor alters the weight and feel of the bat.
 
-This got me thinking: Could we make this kind of advanced sports tracking available to anyone, anywhere? Specifically:
+This got me thinking: What if we didn't need hardware at all?
 
-> **Can we track a cricket bat in 3D using just a single, shaky 2D video?**
+> **Can we reconstruct the exact 3D bat swing plane from a single, shaky 2D smartphone video using only AI models?**
 
 The answer, it turns out, is yes—if you are willing to chain together multiple AI models, relative depth estimators, and physics-based filters.
 
 ---
 
-## What We're Building: The BatPlane Pipeline
+## What We're Building: The Bat Swing Plane Pipeline
 
-To solve this, I built **BatPlane**—an AI-driven pipeline designed to reconstruct 3D trajectories from standard 2D videos of a cricket swing. 
+To solve this, I built the **Bat Swing Plane Pipeline**—an AI-driven system designed to reconstruct 3D trajectories from standard 2D videos of a cricket swing. 
 
-Instead of relying on hardware markers or multiple cameras, BatPlane processes the video through a series of key steps:
+Instead of relying on hardware markers or multiple cameras, the Bat Swing Plane pipeline processes the video through a series of key steps:
 
 * **Step 1: Trimming & Stabilizing:** The pipeline finds the window of the swing, trims away the rest of the footage, and cancels out camera shake by locking onto the pitch's crease lines.
 * **Step 2: Isolating the Bat:** It tracks and segments the bat in every frame, creating a pixel-perfect mask.
@@ -44,15 +46,25 @@ This pipeline runs locally on a consumer GPU, processing a typical trimmed video
 
 The pipeline is split into 6 stages. Here's the full stack:
 
-| Stage | What Happens | Model / Algorithm |
-|-------|-------------|-------------------|
-| 1. **Trim** | Isolate the exact moment the batsman is playing a shot | YOLO11x + YOLOv8-Pose |
-| 2. **Stabilize** | Lock the camera onto the cricket pitch | Grounding DINO + SAM 2 |
-| 3a. **Depth** | Generate per-pixel depth maps | Depth Anything V2 Large |
-| 3b. **Segment** | Isolate the bat from every frame | SAM 3.1 Multiplex |
-| 4. **Keypoints** | Find the blade tip and handle coordinates | PCA + YOLOv8-Pose wrists |
-| 5. **3D Fusion** | Merge 2D keypoints with depth; fill gaps | 9-State Kalman RTS Smoother |
-| 6. **Render** | Animate the 3D trajectory | Matplotlib + FFmpeg |
+```mermaid
+graph LR
+    subgraph Pre-Processing
+        T[1. Trim<br><i>YOLO11x + Pose</i>] --> S[2. Stabilize<br><i>Grounding DINO + SAM 2</i>]
+    end
+    
+    subgraph AI Inference
+        S --> D[3a. Depth Maps<br><i>Depth Anything V2</i>]
+        S --> Seg[3b. Bat Mask<br><i>SAM 3.1</i>]
+    end
+    
+    subgraph Physics & Fusion
+        D --> K[4. Keypoints<br><i>PCA + Wrists</i>]
+        Seg --> K
+        K --> F[5. 3D Fusion<br><i>Kalman RTS</i>]
+    end
+    
+    F --> R([6. Render Output<br><i>Matplotlib + FFmpeg</i>])
+```
 
 All six models are loaded once (~10 seconds) and reused across every video. There is zero fine-tuning — every model is used off-the-shelf with its pretrained weights.
 
