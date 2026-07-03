@@ -48,22 +48,28 @@ The pipeline is split into 6 stages. Here's the full stack:
 
 ```mermaid
 graph LR
+    %% Style Definitions
+    classDef prep fill:#ff9f43,stroke:#c87b32,color:#000,stroke-width:2px;
+    classDef infer fill:#0abde3,stroke:#0984e3,color:#000,stroke-width:2px;
+    classDef phys fill:#1dd1a1,stroke:#10ac84,color:#000,stroke-width:2px;
+    classDef out fill:#ff7675,stroke:#d63031,color:#000,stroke-width:2px;
+
     subgraph Pre-Processing
-        T[1. Trim<br><i>YOLO11x + Pose</i>] --> S[2. Stabilize<br><i>Grounding DINO + SAM 2</i>]
+        T[1. Trim Video<br><i>YOLO11x + Pose</i>]:::prep --> S[2. Stabilize Camera<br><i>Grounding DINO + SAM 2</i>]:::prep
     end
     
     subgraph AI Inference
-        S --> D[3a. Depth Maps<br><i>Depth Anything V2</i>]
-        S --> Seg[3b. Bat Mask<br><i>SAM 3.1</i>]
+        S -- "Clean Frames" --> D[3a. Depth Maps<br><i>Depth Anything V2</i>]:::infer
+        S -- "Clean Frames" --> Seg[3b. Bat Mask<br><i>SAM 3.1</i>]:::infer
     end
     
     subgraph Physics & Fusion
-        D --> K[4. Keypoints<br><i>PCA + Wrists</i>]
-        Seg --> K
-        K --> F[5. 3D Fusion<br><i>Kalman RTS</i>]
+        D -- "Z-Depth" --> K[4. 3D Keypoints<br><i>PCA + Wrists</i>]:::phys
+        Seg -- "X, Y Pixels" --> K
+        K -- "Raw 3D Points" --> F[5. 3D Fusion<br><i>Kalman RTS</i>]:::phys
     end
     
-    F --> R([6. Render Output<br><i>Matplotlib + FFmpeg</i>])
+    F -- "Smooth Trajectory" --> R([6. Render Output<br><i>Matplotlib + FFmpeg</i>]):::out
 ```
 
 All six models are loaded once (~10 seconds) and reused across every video. There is zero fine-tuning — every model is used off-the-shelf with its pretrained weights.
