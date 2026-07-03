@@ -224,7 +224,9 @@ black_mask = np.all(raw_frame == 0, axis=-1)
 depth_map[black_mask] = 0.0
 ```
 
-<!-- [IMAGE: RGB frame alongside its TURBO-colormapped depth map] -->
+![Depth Map Output](assets/stage3a_depth.gif)
+
+[Watch the high-res Depth Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage3a_depth.mp4)
 
 ---
 
