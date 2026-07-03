@@ -157,15 +157,15 @@ graph TD
 
     T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Camera<br><i>Grounding DINO + SAM 2</i>"]:::prep
     
-    S --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
-    S --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
+    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
+    S -- "Stable Frames" --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
     
-    D --> K["3D Keypoints<br><i>PCA + Wrists</i>"]:::phys
-    Seg --> K
+    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA + Wrists</i>"]:::phys
+    Seg -- "X, Y Pixels" --> K
     
-    K --> F["3D Fusion<br><i>Kalman RTS</i>"]:::phys
+    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Kalman RTS</i>"]:::phys
     
-    F === R["Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"]:::out
+    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"]:::out
 
     %% Animation like Option 3
     linkStyle 0,1,2,3,4,5 stroke:#fff,stroke-width:2px,stroke-dasharray: 8 4;
