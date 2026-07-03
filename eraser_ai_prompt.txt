@@ -1,0 +1,53 @@
+Create a highly visual, professional architecture diagram for a computer vision pipeline called the "Bat Swing Plane Pipeline". The pipeline takes a raw video of a cricket swing and generates a 3D animated trajectory.
+
+Please build the diagram using the following 4 groups, nodes, and exact connections:
+
+1. **Group: Pre-Processing**
+   * **Node A**: 1. Trim Video (YOLO11x + Pose)
+   * **Node B**: 2. Stabilize Camera (Grounding DINO + SAM 2)
+   * *Connection*: Raw Video Input -> Node A -> Node B
+
+2. **Group: AI Inference (Parallel)**
+   * **Node C**: 3a. Depth Maps (Depth Anything V2)
+   * **Node D**: 3b. Bat Mask (SAM 3.1)
+   * *Connections*: Node B branches out and connects to BOTH Node C and Node D (passing "Clean Frames").
+
+3. **Group: Physics & Fusion**
+   * **Node E**: 4. 3D Keypoints (PCA + Wrists)
+   * **Node F**: 5. 3D Fusion (Kalman RTS)
+   * *Connections*: Both Node C (passing "Z-Depth") and Node D (passing "X, Y Pixels") converge and connect into Node E.
+   * *Connection*: Node E connects to Node F (passing "Raw 3D Points").
+
+4. **Group: Final Output**
+   * **Node G**: 6. Render Bat Swing Plane (Matplotlib + FFmpeg)
+   * *Connection*: Node F connects to Node G (passing "Smooth Trajectory").
+
+Please make the groups visually distinct (e.g., using containers or boundaries), arrange it top-to-bottom or left-to-right, and use appropriate icons (like video cameras, AI brains, mathematical symbols, and 3D graphs).
+
+
+Create an architecture diagram for a complex Computer Vision pipeline called the "Bat Swing Plane Pipeline". The pipeline takes raw mobile phone video of a cricket batsman and generates a fully stabilized, 3D animated trajectory of their bat swing.
+
+Please structure the diagram using the following groups and connections:
+
+1. **Group: Pre-Processing**
+   * **Raw Video Input**: The starting point
+   * **Action Trimming (YOLOv8)**: Detects the batsman and trims the video down to a 1-second action clip.
+   * **Pitch Stabilization **: Removes severe camera shake by tracking ground features.
+   * *Connections*: Raw Video Input -> Action Trimming -> Pitch Stabilization.
+
+2. **Group: AI Inference (Parallel Branching)**
+   * **Depth Mapping (DepthAnything V2)**: Generates dense relative Z-axis depth maps for every frame.
+   * **Zero-Shot Segmentation (SAM 2)**: Uses a dual-session subtraction trick to generate clean masks of the cricket bat (ignoring the wickets).
+   * *Connections*: Pitch Stabilization connects to BOTH Depth Mapping and Zero-Shot Segmentation.
+
+3. **Group: Physics & 3D Fusion**
+   * **PCA Sub-Pixel Geometry**: Analyzes the 2D Bat Masks to extract the exact X,Y pixel coordinates of the bat's handle and tip.
+   * **3D Kalman Filter Smoothing**: Fuses the X,Y coordinates from the PCA step with the Z-Depth coordinates from the Depth Maps to create mathematically smooth, gap-filled 3D points in space.
+   * *Connections*: Zero-Shot Segmentation -> PCA Sub-Pixel Geometry -> 3D Kalman Filter Smoothing. 
+   * *Connections*: Depth Mapping -> 3D Kalman Filter Smoothing.
+
+4. **Group: Final Output**
+   * **3D Trajectory Renderer**: Uses Matplotlib and FFmpeg to output a colored 3D ribbon animation of the bat swing.
+   * *Connections*: 3D Kalman Filter Smoothing -> 3D Trajectory Renderer.
+
+Please make the AI Inference group visually distinct (perhaps side-by-side nodes), use icons for the nodes (like a camera for video, a brain for AI, a math symbol for PCA), and ensure the layout flows cleanly from top to bottom or left to right.
