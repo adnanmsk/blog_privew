@@ -4,9 +4,7 @@
 
 ---
 
-<video autoplay loop muted playsinline width="100%">
-  <source src="assets/hero_3d_swing_plane.mp4" type="video/mp4">
-</video>
+<video src="assets/hero_3d_swing_plane.mp4" autoplay loop muted controls="controls" width="100%"></video>
 
 ## Breaking the Hardware Barrier for 3D Swing Analysis
 
