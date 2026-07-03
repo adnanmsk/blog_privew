@@ -4,7 +4,9 @@
 
 ---
 
-<!-- [IMAGE: Hero composite — raw video frame on left, 3D bat swing plane animation on right] -->
+<video autoplay loop muted playsinline width="100%">
+  <source src="assets/hero_3d_swing_plane.mp4" type="video/mp4">
+</video>
 
 ## Breaking the Hardware Barrier for 3D Swing Analysis
 
