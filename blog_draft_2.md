@@ -47,7 +47,7 @@ This pipeline runs locally on a consumer GPU, processing a typical trimmed video
 The pipeline is split into 6 stages. Here's the full stack:
 
 ```mermaid
-graph LR
+graph TD
     %% Style Definitions
     classDef prep fill:#ff9f43,stroke:#c87b32,color:#000,stroke-width:2px;
     classDef infer fill:#0abde3,stroke:#0984e3,color:#000,stroke-width:2px;
