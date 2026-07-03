@@ -420,25 +420,28 @@ By rendering from three different camera angles (e.g., top-down, side-profile, a
 ---
 
 
-## Results: 60 Videos, Zero Failures
+## Results: 60 Videos "In the Wild"
 
 I tested the pipeline on a batch of 60 cricket videos covering a range of shot types—cover drives, pull shots, cuts, flicks, defensive blocks, and lofted shots—from both left-handed and right-handed batsmen. The videos were filmed on standard mobile phones at varying angles and distances.
 
 | Metric | Value |
 |--------|-------|
-| Videos processed | 60 / 60 |
-| Success rate | 100% |
+| Videos processed | 60 |
+| Success rate | 59 / 60 (98.3%) |
 | Average processing time | ~10 seconds / video |
 | Average frames per clip | ~24 (trimmed) |
 | Bat mask detection rate | ~95% of frames |
 | Valid 3D depth observations | ~93% of frames |
 | Kalman gap-fills needed | Median 1 frame / video |
 
-The pipeline successfully handles:
-- Different camera angles (behind the bowler, side-on, slightly elevated)
-- Different lighting conditions (bright sun, overcast, indoor nets)
-- Both left-handed and right-handed batsmen (the PCA + wrist system is completely hand-agnostic)
-- Partial bat occlusion during the backswing or follow-through
+> [!NOTE]
+> **The 1 Failure Case:** The single failure occurred on a video shot on a field with no painted crease lines. Because the Stage 2 Pitch Detection relies on finding these high-contrast pitch boundaries to calculate its homography matrix, it couldn't lock the camera in place. This caused the 3D depth map to shake violently and corrupted the trajectory.
+
+The pipeline is highly robust, successfully handling:
+* ✅ **Camera Variations:** Behind the bowler, side-on, and slightly elevated angles.
+* ✅ **Environmental Noise:** Bright sun, overcast shadows, and indoor nets.
+* ✅ **Player Variations:** Left-handed and right-handed batsmen (the PCA + wrist system is completely hand-agnostic).
+* ✅ **Severe Occlusions:** Bat passing behind the body during backswings.
 
 <!-- [GALLERY: 4-6 side-by-side results showing different shot types] -->
 
