@@ -125,8 +125,8 @@ graph TD
     end
     
     subgraph AI Inference
-        S -- "Clean Frames" --> D{"3a. Depth Maps<br><i>Depth Anything V2</i>"}:::infer
-        S -- "Clean Frames" --> Seg{"3b. Bat Mask<br><i>SAM 3.1</i>"}:::infer
+        S -- "Stable Frames" --> D{"3a. Depth Maps<br><i>Depth Anything V2</i>"}:::infer
+        S -- "Stable Frames" --> Seg{"3b. Bat Mask<br><i>SAM 3.1</i>"}:::infer
     end
     
     subgraph Physics & Fusion
@@ -140,4 +140,47 @@ graph TD
     %% Animated Dashed Flow Lines
     linkStyle 0,1,2,3,4,5 stroke:#fff,stroke-width:2px,stroke-dasharray: 5 5;
     linkStyle 6 stroke:#ff7675,stroke-width:4px,stroke-dasharray: 10 5;
+```
+
+---
+
+### Option 5: The "True Animated" Clean Layout
+*This version removes all the numbers (1, 2, 3a, 3b) from the nodes for a cleaner look. Crucially, it injects a raw HTML `<style>` block to define actual moving CSS keyframe animations for the dashed lines! (Note: This animation will work beautifully if you host the blog on a custom site like Next.js, Gatsby, or Hashnode, though GitHub's native preview may strip the CSS).*
+
+<style>
+  @keyframes movingDash {
+    to {
+      stroke-dashoffset: -20;
+    }
+  }
+</style>
+
+```mermaid
+graph TD
+    %% Custom Premium Styles
+    classDef prep fill:#ff9f43,stroke:#c87b32,color:#000,stroke-width:3px,rx:10px,ry:10px;
+    classDef infer fill:#0abde3,stroke:#0984e3,color:#000,stroke-width:3px,rx:10px,ry:10px;
+    classDef phys fill:#1dd1a1,stroke:#10ac84,color:#000,stroke-width:3px,rx:10px,ry:10px;
+    classDef out fill:#ff7675,stroke:#d63031,color:#000,stroke-width:4px,rx:15px,ry:15px,font-weight:bold;
+
+    subgraph Pre-Processing
+        T("Trim Video<br><i>YOLO11x + Pose</i>"):::prep --> S("Stabilize Camera<br><i>Grounding DINO + SAM 2</i>"):::prep
+    end
+    
+    subgraph AI Inference
+        S -- "Stable Frames" --> D{"Depth Maps<br><i>Depth Anything V2</i>"}:::infer
+        S -- "Stable Frames" --> Seg{"Bat Mask<br><i>SAM 3.1</i>"}:::infer
+    end
+    
+    subgraph Physics & Fusion
+        D -- "Z-Depth" --> K("3D Keypoints<br><i>PCA + Wrists</i>"):::phys
+        Seg -- "X, Y Pixels" --> K
+        K -- "Raw 3D Points" --> F(("3D Fusion<br><i>Kalman RTS</i>")):::phys
+    end
+    
+    F == "Smooth Trajectory" === R[/"Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"/]:::out
+
+    %% True CSS Animated Dashed Flow Lines
+    linkStyle 0,1,2,3,4,5 stroke:#fff,stroke-width:2px,stroke-dasharray: 5 5,animation: movingDash 1s linear infinite;
+    linkStyle 6 stroke:#ff7675,stroke-width:4px,stroke-dasharray: 10 5,animation: movingDash 0.5s linear infinite;
 ```
