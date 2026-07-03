@@ -4,7 +4,7 @@
 
 ---
 
-![Hero 3D Swing Plane](assets/hero_3d_swing_plane.mp4)
+![Hero 3D Swing Plane](assets/hero_3d_swing_plane.gif)
 
 [Watch the full 3D Swing Plane Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/hero_3d_swing_plane.mp4)
 
