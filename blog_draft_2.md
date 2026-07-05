@@ -1,6 +1,6 @@
 # 3D Cricket Bat Trajectory: Mapping the Swing Plane from Unstable 2D Video
 
-*Extracting the precise 3D bat swing plane from a standard 2D video—no sensors, no multi-camera rigs, just AI.*
+*Extracting the precise 3D bat swing plane from a standard 2D video-no sensors, no multi-camera rigs, just AI.*
 
 ---
 
@@ -10,7 +10,7 @@
 
 ## Breaking the Hardware Barrier for 3D Swing Analysis
 
-When analyzing a cricket shot, the most critical piece of data is the **3D bat swing plane**—the exact arc and angle the bat travels through space. Knowing the 3D bat swing plane immediately reveals if a player is slicing the ball, playing across the line, or coming down perfectly straight.
+When analyzing a cricket shot, the most critical piece of data is the **3D bat swing plane**-the exact arc and angle the bat travels through space. Knowing the 3D bat swing plane immediately reveals if a player is slicing the ball, playing across the line, or coming down perfectly straight.
 
 Because a swing happens in about 150 milliseconds, it is impossible for the human eye to track the exact 3D bat swing plane in real-time. To capture it, players rely entirely on specialized hardware:
 - **Smart Sensors:** Players attach physical gyroscopic sensors to the handle of their bats (like StanceBeam or Blast Motion) to record their swing.
@@ -22,13 +22,13 @@ This got me thinking: What if we didn't need hardware at all?
 
 > **Can we map the exact 3D bat swing plane from a single, shaky 2D smartphone video using only AI models?**
 
-The answer, it turns out, is yes—if you are willing to chain together multiple AI models, relative depth estimator, and physics-based filters.
+The answer, it turns out, is yes-if you are willing to chain together multiple AI models, relative depth estimator, and physics-based filters.
 
 ---
 
 ## What We're Building: The Bat Swing Plane Pipeline
 
-To solve this, we built the **Bat Swing Plane Pipeline**—an AI-driven system designed to reconstruct 3D trajectories from standard 2D videos of a cricket swing. 
+To solve this, we built the **Bat Swing Plane Pipeline**-an AI-driven system designed to reconstruct 3D trajectories from standard 2D videos of a cricket swing. 
 
 Instead of relying on hardware markers or multiple cameras, the Bat Swing Plane pipeline processes the video through a series of key steps:
 
@@ -74,13 +74,13 @@ graph TD
 ```
 
 
-All six models are loaded once (~10 seconds) and reused across every video. There is zero fine-tuning — every model is used off-the-shelf with its pretrained weights.
+All six models are loaded once (~10 seconds) and reused across every video. There is zero fine-tuning - every model is used off-the-shelf with its pretrained weights.
 
 ---
 
 ## Stage 1: Isolating the Active Swing
 
-The input video clips are typically very short—around 1 to 2 seconds long. However, they often contain extra frames at the start or end where the batsman is out of frame or simply standing still. Stage 1 automatically crops the video in time, isolating *only* the active window where the shot is actually being played.
+The input video clips are typically very short-around 1 to 2 seconds long. However, they often contain extra frames at the start or end where the batsman is out of frame or simply standing still. Stage 1 automatically crops the video in time, isolating *only* the active window where the shot is actually being played.
 
 The pipeline processes each frame using two models simultaneously:
 * **YOLO11x** detects the bat.
@@ -149,7 +149,7 @@ Every pitch has two white crease lines painted on the ground (the bowling and ba
 
 ### Finding the Lines with Zero Training Data
 
-To find these lines without training a custom model, we use **Grounding DINO**—an object detection model that understands English. We feed it a simple text query:
+To find these lines without training a custom model, we use **Grounding DINO**-an object detection model that understands English. We feed it a simple text query:
 
 ```text
 "the vertical white line . white boundary line"
@@ -255,7 +255,7 @@ clean_masks = {f: bat_masks[f] & ~wkt_masks[f] for f in all_fidxs}
 
 ### Filtering with the "Wicket Zone"
 
-Even after subtraction, tiny fragments of the stumps might remain. To completely eliminate this noise, we compute a **Wicket Exclusion Zone**—a bounding box that averages the position of the stumps across all frames. 
+Even after subtraction, tiny fragments of the stumps might remain. To completely eliminate this noise, we compute a **Wicket Exclusion Zone*-a bounding box that averages the position of the stumps across all frames. 
 
 ```python
 # Create an average bounding box around all detected wicket masks
@@ -341,7 +341,7 @@ Before doing any advanced math, we filter out impossible depth values. For every
 
 ### The 9-State Kalman RTS Smoother
 
-To turn these noisy, gap-filled observations into a silky-smooth 3D trajectory, I use a **Rauch-Tung-Striebel (RTS) smoother** — a two-pass extension of the Kalman filter.
+To turn these noisy, gap-filled observations into a silky-smooth 3D trajectory, I use a **Rauch-Tung-Striebel (RTS) smoother** - a two-pass extension of the Kalman filter.
 
 The state vector tracks position, velocity, and acceleration in all three dimensions:
 
@@ -376,7 +376,7 @@ This means if the bat disappears behind the batsman's leg for 3 frames, the smoo
 
 Now that we have a mathematical trajectory, it's time to visualize it.
 
-The final trajectory is rendered as a **ruled-surface ribbon**—a continuous 3D shape representing the "swept plane" of the bat face. For every frame, the code draws a quadrilateral connecting the previous positions of the tip and handle to their current positions. 
+The final trajectory is rendered as a **ruled-surface ribbon**-a continuous 3D shape representing the "swept plane" of the bat face. For every frame, the code draws a quadrilateral connecting the previous positions of the tip and handle to their current positions. 
 
 To give an intuitive sense of the bat moving toward or away from the camera, the ribbon is colored using a violet-to-yellow depth gradient.
 
@@ -422,7 +422,7 @@ By rendering from three different camera angles (e.g., side-profile, and standar
 
 ## Results: Stress-Testing 60 Real-World Swings
 
-I tested the pipeline on a batch of 60 cricket videos covering a range of shot types—cover drives, pull shots, cuts, flicks, defensive blocks, and lofted shots—from both left-handed and right-handed batsmen. The videos were filmed on standard mobile phones at varying angles and distances.
+We tested the pipeline on a batch of 60 cricket videos covering a range of shot type-cover drives, pull shots, cuts, flicks, defensive blocks, and lofted shots-from both left-handed and right-handed batsmen. The videos were filmed on standard mobile phones at varying angles and distances.
 
 | Metric | Value |
 |--------|-------|
@@ -455,7 +455,7 @@ No engineering project is complete without a list of things that broke along the
 In early versions, SAM 3.1 locked onto the wicket stumps instead of the bat in ~20% of videos. The stumps and bat are both long, thin, wooden objects. The dual-session subtraction trick (Stage 3b) solved this completely.
 
 ### Camera Shake Corrupting Depth
-Without pitch stabilization, the sampled Z-coordinates drifted wildly between frames. The bat hadn't moved in the real world, but the *camera* had moved—shifting the bat to a different part of the depth map and giving it a different relative depth. Stabilizing the footage to the crease lines (Stage 2) eliminated this class of error entirely.
+Without pitch stabilization, the sampled Z-coordinates drifted wildly between frames. The bat hadn't moved in the real world, but the *camera* had moved-shifting the bat to a different part of the depth map and giving it a different relative depth. Stabilizing the footage to the crease lines (Stage 2) eliminated this class of error entirely.
 
 
 
@@ -496,18 +496,18 @@ python run_single.py --input your_cricket_video.mp4
 python run_batch.py --input-dir ./your_videos/ --output-dir ./results/
 ```
 
-The pipeline is configured through a single `config.py` file containing over 150 tunable constants — everything from YOLO confidence thresholds to Kalman filter noise parameters. If something doesn't work on your videos, the fix is almost certainly a config tweak, not a code change.
+The pipeline is configured through a single `config.py` file containing over 150 tunable constants - everything from YOLO confidence thresholds to Kalman filter noise parameters. If something doesn't work on your videos, the fix is almost certainly a config tweak, not a code change.
 
 ---
 
 ## References
 
-1. Ultralytics YOLO — https://docs.ultralytics.com/
-2. Segment Anything Model 2 (SAM 2) — https://github.com/facebookresearch/segment-anything-2
-3. Depth Anything V2 — https://huggingface.co/depth-anything/Depth-Anything-V2-Large-hf
-4. Grounding DINO — https://github.com/IDEA-Research/GroundingDINO
+1. Ultralytics YOLO - https://docs.ultralytics.com/
+2. Segment Anything Model 2 (SAM 2) - https://github.com/facebookresearch/segment-anything-2
+3. Depth Anything V2 - https://huggingface.co/depth-anything/Depth-Anything-V2-Large-hf
+4. Grounding DINO - https://github.com/IDEA-Research/GroundingDINO
 5. Rauch, H. E., Tung, F., and Striebel, C. T. (1965). *Maximum Likelihood Estimates of Linear Dynamic Systems.* AIAA Journal.
-6. OpenCV — https://docs.opencv.org/
+6. OpenCV - https://docs.opencv.org/
 
 ---
 
