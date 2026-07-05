@@ -474,11 +474,10 @@ One of the most impressive parts of this pipeline is that it requires **zero fin
 | SAM 3.1 Multiplex | ~1.2B | 3.5 GB | Video object segmentation |
 | Depth Anything V2 Large | ~335M | ~1.3 GB | Monocular depth estimation |
 
-**Total VRAM footprint:** All models are loaded into memory once and share the GPU context. Because they are running zero-shot inference rather than training, the entire pipeline runs comfortably on a single GPU with 12 GB of VRAM, processing each video in just ~10 seconds!
 
 
 
-## Try It Yourself
+<!-- ## Try It Yourself
 
 The full source code, model weights, and test videos are available on GitHub.
 
@@ -498,7 +497,7 @@ python run_batch.py --input-dir ./your_videos/ --output-dir ./results/
 
 The pipeline is configured through a single `config.py` file containing over 150 tunable constants - everything from YOLO confidence thresholds to Kalman filter noise parameters. If something doesn't work on your videos, the fix is almost certainly a config tweak, not a code change.
 
----
+--- -->
 
 ## References
 
