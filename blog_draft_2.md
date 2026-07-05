@@ -281,7 +281,7 @@ This dual-session approach isn't cricket-specific. It's a general computer visio
 
 ## Stage 4: Turning a Blob into a Vector (The PCA Hack)
 
-At this point, we have a clean, perfectly tracked binary mask of the bat in every frame. But a mask is just a blob of white pixels. To reconstruct a 3D trajectory, we need the exact X, Y coordinates of two specific points: the **handle** (where the batsman grips) and the **blade tip** (the far end of the bat).
+At this point, we have a clean, perfectly tracked binary mask of the bat in every frame. But a mask is just a blob of white pixels. To reconstruct a 3D trajectory, we need the exact X, Y coordinates of two specific points: the **handle** (where the batsman grips) and the **bat tip** (the far end of the bat).
 
 ### Finding the Bat's Axis with PCA
 
@@ -313,7 +313,7 @@ But there is a catch: math doesn't know which end is the handle and which end is
 
 To solve this, we bring back **YOLOv8-Pose**. We use it to detect the batsman's wrists (COCO keypoints 9 and 10). We calculate the midpoint between the left and right wrists to find the player's grip.
 
-The endpoint of the bat's axis that is closest to this grip is classified as the **handle**. The opposite end is the **blade tip**.
+The endpoint of the bat's axis that is closest to this grip is classified as the **handle**. The opposite end is the **bat tip**.
 
 **The Width Tiebreaker:** What happens if the batsman's hands are blocked from the camera's view? We fall back on a structural rule: a cricket bat's blade is significantly wider than its handle. We count the pixels at both ends of the axis. The end with the higher pixel density is crowned the tip.
 
