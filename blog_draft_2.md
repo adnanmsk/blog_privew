@@ -22,25 +22,25 @@ This got me thinking: What if we didn't need hardware at all?
 
 > **Can we map the exact 3D bat swing plane from a single, shaky 2D smartphone video using only AI models?**
 
-The answer, it turns out, is yes—if you are willing to chain together multiple AI models, relative depth estimators, and physics-based filters.
+The answer, it turns out, is yes—if you are willing to chain together multiple AI models, relative depth estimator, and physics-based filters.
 
 ---
 
 ## What We're Building: The Bat Swing Plane Pipeline
 
-To solve this, I built the **Bat Swing Plane Pipeline**—an AI-driven system designed to reconstruct 3D trajectories from standard 2D videos of a cricket swing. 
+To solve this, we built the **Bat Swing Plane Pipeline**—an AI-driven system designed to reconstruct 3D trajectories from standard 2D videos of a cricket swing. 
 
 Instead of relying on hardware markers or multiple cameras, the Bat Swing Plane pipeline processes the video through a series of key steps:
 
 * **Step 1: Trimming & Stabilizing:** The pipeline finds the window of the swing, trims away the rest of the footage, and cancels out camera shake by locking onto the pitch's crease lines.
 * **Step 2: Isolating the Bat:** It tracks and segments the bat in every frame, creating a pixel-perfect mask.
 * **Step 3: Estimating Depth:** It generates a depth map for each frame, estimating how far the bat is from the camera to help recover the missing third dimension.
-* **Step 4: Finding Keypoints in 3D:** It calculates the coordinates of the bat's handle and blade tip, combining them with the depth map to get raw 3D positions.
+* **Step 4: Finding Keypoints in 3D:** It calculates the coordinates of the bat's handle and tip(end of the bat), combining them with the depth map to get raw 3D positions.
 * **Step 5: Physics Smoothing & Rendering:** A physical motion model (a Kalman filter) smooths out depth noise and draws the swing path as a continuous 3D ribbon.
 
-This pipeline runs locally on a consumer GPU, processing a typical trimmed video in about 30 seconds.
+This pipeline runs locally on a consumer GPU, processing a typical swing clip in about 10-15 seconds.
 
-<!-- [VIDEO/GIF: The final side_by_side_4in1.mp4 output showing all 4 panels] -->
+
 
 ---
 
@@ -50,29 +50,29 @@ The pipeline is split into 6 stages. Here's the full stack:
 
 ```mermaid
 graph TD
-    %% Style Definitions
-    classDef prep fill:#ff9f43,stroke:#c87b32,color:#000,stroke-width:2px;
-    classDef infer fill:#0abde3,stroke:#0984e3,color:#000,stroke-width:2px;
-    classDef phys fill:#1dd1a1,stroke:#10ac84,color:#000,stroke-width:2px;
-    classDef out fill:#ff7675,stroke:#d63031,color:#000,stroke-width:2px;
+    %% Custom Premium Styles
+    classDef prep fill:#3b0764,stroke:#a855f7,color:#fff,stroke-width:3px,rx:5px,ry:5px;
+    classDef infer fill:#083344,stroke:#06b6d4,color:#fff,stroke-width:3px,rx:5px,ry:5px;
+    classDef phys fill:#064e3b,stroke:#10b981,color:#fff,stroke-width:3px,rx:5px,ry:5px;
+    classDef out fill:#881337,stroke:#f43f5e,color:#fff,stroke-width:4px,rx:8px,ry:8px,font-weight:bold;
 
-    subgraph Pre-Processing
-        T[1. Trim Video<br><i>YOLO11x + Pose</i>]:::prep --> S[2. Stabilize Camera<br><i>Grounding DINO + SAM 2</i>]:::prep
-    end
+    T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Video<br><i>Grounding DINO + SAM 2</i>"]:::prep
     
-    subgraph AI Inference
-        S -- "Clean Frames" --> D[3a. Depth Maps<br><i>Depth Anything V2</i>]:::infer
-        S -- "Clean Frames" --> Seg[3b. Bat Mask<br><i>SAM 3.1</i>]:::infer
-    end
+    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
+    S -- "Stable Frames" --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
     
-    subgraph Physics & Fusion
-        D -- "Z-Depth" --> K[4. 3D Keypoints<br><i>PCA + Wrists</i>]:::phys
-        Seg -- "X, Y Pixels" --> K
-        K -- "Raw 3D Points" --> F[5. 3D Fusion<br><i>Kalman RTS</i>]:::phys
-    end
+    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA + Wrists</i>"]:::phys
+    Seg -- "X, Y Pixels" --> K
     
-    F -- "Smooth Trajectory" --> R([6. Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>]):::out
+    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Kalman RTS</i>"]:::phys
+    
+    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"]:::out
+
+    %% Animation like Option 3
+    linkStyle 0,1,2,3,4,5 stroke:#fff,stroke-width:2px,stroke-dasharray: 8 4;
+    linkStyle 6 stroke:#ff7675,stroke-width:4px,stroke-dasharray: 10 5;
 ```
+
 
 All six models are loaded once (~10 seconds) and reused across every video. There is zero fine-tuning — every model is used off-the-shelf with its pretrained weights.
 
