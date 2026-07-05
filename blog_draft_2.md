@@ -406,7 +406,7 @@ with concurrent.futures.ProcessPoolExecutor() as executor:
         subprocess.run(["ffmpeg", "-y", "-i", "frame_%04d.png", "-c:v", "libx264", ...])
 ```
 
-By rendering from three different camera angles (e.g., top-down, side-profile, and standard view) simultaneously, we get a comprehensive 3D view of the trajectory in seconds rather than minutes.
+By rendering from three different camera angles (e.g., side-profile, and standard view) simultaneously, we get a comprehensive 3D view of the trajectory in seconds rather than minutes.
 
 <p align="center">
   <img src="assets/stage5_3d_trajectory.gif" alt="3D Swing Trajectory Front and Side" width="100%" />
