@@ -61,7 +61,7 @@ graph TD
     S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
     S -- "Stable Frames" --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
     
-    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA + Wrists</i>"]:::phys
+    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
     Seg -- "X, Y Pixels" --> K
     
     K -- "Raw 3D Points" --> F["3D Fusion<br><i>Kalman RTS</i>"]:::phys
