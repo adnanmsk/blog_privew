@@ -1,4 +1,4 @@
-# 3D Cricket Bat Trajectory: Reconstructing the Swing Trajectory from Unstable 2D Video
+# 3D Cricket Bat Trajectory: Mapping the Swing Plane from Unstable 2D Video
 
 *Extracting the precise 3D bat swing plane from a standard 2D video—no sensors, no multi-camera rigs, just AI.*
 
@@ -16,11 +16,11 @@ Because a swing happens in about 150 milliseconds, it is impossible for the huma
 - **Smart Sensors:** Players attach physical gyroscopic sensors to the handle of their bats (like StanceBeam or Blast Motion) to record their swing.
 - **Biomechanics Labs:** Complex motion-capture studios use multiple infrared cameras to track reflective stickers pasted onto the bat.
 
-While these hardware solutions are accurate, they are incredibly expensive, confined to specialized facilities, and intrusive—attaching a physical sensor alters the weight and feel of the bat.
+While these hardware solutions are accurate, they are incredibly expensive, confined to specialized facilities, and attaching a physical sensor alters the weight and feel of the bat.
 
 This got me thinking: What if we didn't need hardware at all?
 
-> **Can we reconstruct the exact 3D bat swing plane from a single, shaky 2D smartphone video using only AI models?**
+> **Can we map the exact 3D bat swing plane from a single, shaky 2D smartphone video using only AI models?**
 
 The answer, it turns out, is yes—if you are willing to chain together multiple AI models, relative depth estimators, and physics-based filters.
 
