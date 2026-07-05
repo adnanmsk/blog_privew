@@ -333,7 +333,7 @@ Now we have, for each frame:
 
 By sampling the depth map at the (X, Y) location of our keypoints, we extract their Z-coordinates. We now have raw 3D observations of the cricket bat!
 
-But there is a major problem: these observations are incredibly noisy. Because monocular depth models predict depth frame-by-frame, they have no temporal consistency. The depth of the bat might flicker wildly between frames. Furthermore, if the bat crosses behind the batsman's body, we get no observation at all.
+However, these raw 3D observations are imperfect and prone to missing data. First, the segmentation model might occasionally drop the bat mask for a frame, leaving us with missing (X, Y) coordinates. Second, because monocular depth models predict depth frame-by-frame without temporal consistency, the depth (Z) can flicker or become noisy. Finally, when the bat crosses behind the batsman's body during the swing, we lose sight of it entirely.
 
 ### Filtering the Noise: Depth Outlier Rejection
 
