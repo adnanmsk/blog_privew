@@ -131,7 +131,7 @@ This code uses four simple factors to find the batsman:
 * `bat_count * 100`: Massive points for being near a bat.
 * `hands_score`: Points for having the left and right wrists close together (which happens when holding a bat).
 * `n`: Points for staying in the frame longer.
-* `- abs(avg_x - FRAME_CENTER_X)`: A penalty for being far away from the center of the screen (which filters out background coaches or keepers standing on the sidelines).
+* `- abs(avg_x - FRAME_CENTER_X)`: A penalty for being far away from the center of the screen (which filters out background players or keepers standing on the sidelines).
 
 The track with the highest score is crowned the batsman, and we trim the video to start and end right around their swing. Any brief gaps where the batsman was lost are filled in using linear interpolation (connecting the dots). This trims the clip down to just the ~25 frames of pure action, saving huge amounts of processing time later.
 
