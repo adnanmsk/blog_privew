@@ -20,7 +20,7 @@
         .pipeline-container {
             position: relative;
             width: 1000px;
-            height: 600px;
+            height: 700px;
             background: #111827;
             border-radius: 20px;
             box-shadow: 0 0 50px rgba(0, 245, 212, 0.1);
@@ -65,16 +65,16 @@
         .out { border-color: #ec4899; box-shadow: 0 0 20px rgba(236, 72, 153, 0.4); }
 
         /* Node Positions - PERFECTLY CENTERED (Center Line at 500px) */
-        #n1 { top: 40px; left: 410px; }
-        #n2 { top: 160px; left: 410px; }
+        #n1 { top: 30px; left: 410px; }
+        #n2 { top: 140px; left: 410px; }
         
-        #n3a { top: 280px; left: 210px; }
-        #n3b { top: 280px; left: 610px; }
+        #n3a { top: 260px; left: 210px; }
+        #n3b { top: 260px; left: 610px; }
         
-        #n4 { top: 400px; left: 410px; }
-        #n5 { top: 520px; left: 410px; }
+        #n4 { top: 380px; left: 410px; }
+        #n5 { top: 490px; left: 410px; }
         
-        #n6 { top: 520px; left: 680px; }
+        #n6 { top: 600px; left: 410px; }
 
         /* Animated Pulses */
         .node:hover {
@@ -152,28 +152,28 @@
         <!-- Background SVG Lines -->
         <svg>
             <!-- 1 to 2 -->
-            <path d="M 500 110 L 500 160" class="line animated-line-slow" />
+            <path d="M 500 100 L 500 140" class="line animated-line-slow" />
             <!-- 2 to 3a and 3b -->
-            <path d="M 500 230 Q 500 255 300 280" class="line animated-line" />
-            <path d="M 500 230 Q 500 255 700 280" class="line animated-line" />
+            <path d="M 500 210 Q 500 235 300 260" class="line animated-line" />
+            <path d="M 500 210 Q 500 235 700 260" class="line animated-line" />
             <!-- 3a and 3b to 4 -->
-            <path d="M 300 350 Q 300 375 500 400" class="line animated-line" />
-            <path d="M 700 350 Q 700 375 500 400" class="line animated-line" />
+            <path d="M 300 330 Q 300 355 500 380" class="line animated-line" />
+            <path d="M 700 330 Q 700 355 500 380" class="line animated-line" />
             <!-- 4 to 5 -->
-            <path d="M 500 470 L 500 520" class="line animated-line" />
+            <path d="M 500 450 L 500 490" class="line animated-line" />
             <!-- 5 to 6 -->
-            <path d="M 590 555 L 680 555" class="line animated-line-fast" />
+            <path d="M 500 560 L 500 600" class="line animated-line-fast" />
         </svg>
 
         <!-- Connection Flow Labels -->
-        <div class="line-label" style="top: 232px; left: 325px;">Stable Frames</div>
-        <div class="line-label" style="top: 232px; left: 585px;">Stable Frames</div>
+        <div class="line-label" style="top: 212px; left: 325px;">Stable Frames</div>
+        <div class="line-label" style="top: 212px; left: 585px;">Stable Frames</div>
         
-        <div class="line-label" style="top: 362px; left: 345px;">Z-Depth</div>
-        <div class="line-label" style="top: 362px; left: 575px;">X, Y Pixels</div>
+        <div class="line-label" style="top: 342px; left: 345px;">Z-Depth</div>
+        <div class="line-label" style="top: 342px; left: 575px;">X, Y Pixels</div>
         
-        <div class="line-label" style="top: 483px; left: 450px;">Raw 3D Points</div>
-        <div class="line-label" style="top: 544px; left: 588px;">Smooth Trajectory</div>
+        <div class="line-label" style="top: 460px; left: 515px;">Raw 3D Points</div>
+        <div class="line-label" style="top: 570px; left: 515px;">Smooth Trajectory</div>
 
         <!-- Nodes -->
         <div class="node prep" id="n1">
