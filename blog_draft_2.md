@@ -409,13 +409,13 @@ with concurrent.futures.ProcessPoolExecutor() as executor:
 By rendering from three different camera angles (e.g., side-profile, and standard view) simultaneously, we get a comprehensive 3D view of the trajectory in seconds rather than minutes.
 
 <p align="center">
-  <img src="assets/stage5_3d_trajectory.gif" alt="3D Swing Trajectory Front and Side" width="100%" />
+  <img src="assets/hero_3d_swing_plane.gif" alt="Hero 3D Swing Plane" width="100%" />
 </p>
 <p align="center">
-  <i>Left: Front View &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Right: Side View</i>
+  <i>Left: Stabilized &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Center: 3D Front View &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Right: 3D Side View</i>
 </p>
 
-[Watch the high-res 3D Trajectory Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage5_3d_trajectory.mp4)
+[Watch the high-res 3D Swing Plane Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/hero_3d_swing_plane.mp4)
 
 ---
 
