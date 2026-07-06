@@ -1,3 +1,10 @@
+<style>
+.edgeLabel, .edgeLabel span, .edge-label, .edge-label span {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+</style>
+
 <!-- # Pipeline Diagram Options
 
 Here are upgraded, premium-styled Mermaid diagrams for the Bat Swing Plane Pipeline. They use custom colors, rounded corners, and shapes to look significantly better than the default basic layout! 
@@ -157,15 +164,15 @@ graph TD
 
     T["Trim Video<br><i>Pose Detection</i>"]:::prep --> S["Stabilize Video<br><i>Crease Line Tracking</i>"]:::prep
     
-    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
-    S -- "Stable Frames" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
+    S -- "<span style='border:1px solid #a855f7; background:transparent; padding:2px 5px; border-radius:4px; color:#a855f7; font-size:10px; font-weight:600;'>Stable Frames</span>" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
+    S -- "<span style='border:1px solid #a855f7; background:transparent; padding:2px 5px; border-radius:4px; color:#a855f7; font-size:10px; font-weight:600;'>Stable Frames</span>" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
     
-    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
-    Seg -- "X, Y Pixels" --> K
+    D -- "<span style='border:1px solid #06b6d4; background:transparent; padding:2px 5px; border-radius:4px; color:#06b6d4; font-size:10px; font-weight:600;'>Z-Depth</span>" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "<span style='border:1px solid #06b6d4; background:transparent; padding:2px 5px; border-radius:4px; color:#06b6d4; font-size:10px; font-weight:600;'>X, Y Pixels</span>" --> K
     
-    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
+    K -- "<span style='border:1px solid #10b981; background:transparent; padding:2px 5px; border-radius:4px; color:#10b981; font-size:10px; font-weight:600;'>Raw 3D Points</span>" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
     
-    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
+    F == "<span style='border:1px solid #f43f5e; background:transparent; padding:2px 5px; border-radius:4px; color:#f43f5e; font-size:10px; font-weight:600;'>Smooth Trajectory</span>" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
 
     %% Animation like Option 3
     linkStyle 0,1,2,3,4,5 stroke:#fff,stroke-width:2px,stroke-dasharray: 8 4;
@@ -184,15 +191,15 @@ flowchart TD
     %% Nodes and relationships (Text strictly preserved)
     T["Trim Video<br><i>Pose Detection</i>"]:::prep --> S["Stabilize Video<br><i>Crease Line Tracking</i>"]:::prep
     
-    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
-    S -- "Stable Frames" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
+    S -- "<span style='border:1px solid #3b82f6; background:transparent; padding:2px 5px; border-radius:4px; color:#3b82f6; font-size:10px; font-weight:600;'>Stable Frames</span>" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
+    S -- "<span style='border:1px solid #3b82f6; background:transparent; padding:2px 5px; border-radius:4px; color:#3b82f6; font-size:10px; font-weight:600;'>Stable Frames</span>" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
     
-    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
-    Seg -- "X, Y Pixels" --> K
+    D -- "<span style='border:1px solid #10b981; background:transparent; padding:2px 5px; border-radius:4px; color:#10b981; font-size:10px; font-weight:600;'>Z-Depth</span>" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "<span style='border:1px solid #10b981; background:transparent; padding:2px 5px; border-radius:4px; color:#10b981; font-size:10px; font-weight:600;'>X, Y Pixels</span>" --> K
     
-    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
+    K -- "<span style='border:1px solid #f59e0b; background:transparent; padding:2px 5px; border-radius:4px; color:#f59e0b; font-size:10px; font-weight:600;'>Raw 3D Points</span>" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
     
-    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
+    F == "<span style='border:1px solid #ef4444; background:transparent; padding:2px 5px; border-radius:4px; color:#ef4444; font-size:10px; font-weight:600;'>Smooth Trajectory</span>" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
 
     %% Link styling designed to be visible on any Markdown background
     linkStyle 0,1,2,3,4,5 stroke:#64748b,stroke-width:2px,stroke-dasharray: 5 5
@@ -208,12 +215,12 @@ flowchart TD
     classDef out fill:#1a1a2e,stroke:#43d8c9,stroke-width:3px,color:#fff,rx:12px,ry:12px,font-weight:bold
 
     T["Trim Video<br><i>Pose Detection</i>"]:::prep --> S["Stabilize Video<br><i>Crease Line Tracking</i>"]:::prep
-    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
-    S -- "Stable Frames" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
-    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
-    Seg -- "X, Y Pixels" --> K
-    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
-    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
+    S -- "<span style='border:1px solid #e94560; background:transparent; padding:2px 5px; border-radius:4px; color:#e94560; font-size:10px; font-weight:600;'>Stable Frames</span>" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
+    S -- "<span style='border:1px solid #e94560; background:transparent; padding:2px 5px; border-radius:4px; color:#e94560; font-size:10px; font-weight:600;'>Stable Frames</span>" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
+    D -- "<span style='border:1px solid #0f3460; background:transparent; padding:2px 5px; border-radius:4px; color:#0f3460; font-size:10px; font-weight:600;'>Z-Depth</span>" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "<span style='border:1px solid #0f3460; background:transparent; padding:2px 5px; border-radius:4px; color:#0f3460; font-size:10px; font-weight:600;'>X, Y Pixels</span>" --> K
+    K -- "<span style='border:1px solid #f9a826; background:transparent; padding:2px 5px; border-radius:4px; color:#f9a826; font-size:10px; font-weight:600;'>Raw 3D Points</span>" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
+    F == "<span style='border:1px solid #43d8c9; background:transparent; padding:2px 5px; border-radius:4px; color:#43d8c9; font-size:10px; font-weight:600;'>Smooth Trajectory</span>" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
 
     linkStyle 0,1,2,3,4,5 stroke:#e94560,stroke-width:2px,stroke-dasharray: 5 5
     linkStyle 6 stroke:#43d8c9,stroke-width:4px
@@ -228,12 +235,12 @@ flowchart TD
     classDef out fill:#83c5be,stroke:#006d77,stroke-width:3px,color:#fff,rx:12px,ry:12px,font-weight:bold
 
     T["Trim Video<br><i>Pose Detection</i>"]:::prep --> S["Stabilize Video<br><i>Crease Line Tracking</i>"]:::prep
-    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
-    S -- "Stable Frames" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
-    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
-    Seg -- "X, Y Pixels" --> K
-    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
-    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
+    S -- "<span style='border:1px solid #606c38; background:transparent; padding:2px 5px; border-radius:4px; color:#606c38; font-size:10px; font-weight:600;'>Stable Frames</span>" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
+    S -- "<span style='border:1px solid #606c38; background:transparent; padding:2px 5px; border-radius:4px; color:#606c38; font-size:10px; font-weight:600;'>Stable Frames</span>" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
+    D -- "<span style='border:1px solid #dda15e; background:transparent; padding:2px 5px; border-radius:4px; color:#dda15e; font-size:10px; font-weight:600;'>Z-Depth</span>" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "<span style='border:1px solid #dda15e; background:transparent; padding:2px 5px; border-radius:4px; color:#dda15e; font-size:10px; font-weight:600;'>X, Y Pixels</span>" --> K
+    K -- "<span style='border:1px solid #bc6c25; background:transparent; padding:2px 5px; border-radius:4px; color:#bc6c25; font-size:10px; font-weight:600;'>Raw 3D Points</span>" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
+    F == "<span style='border:1px solid #006d77; background:transparent; padding:2px 5px; border-radius:4px; color:#006d77; font-size:10px; font-weight:600;'>Smooth Trajectory</span>" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
 
     linkStyle 0,1,2,3,4,5 stroke:#606c38,stroke-width:2px,stroke-dasharray: 5 5
     linkStyle 6 stroke:#006d77,stroke-width:4px
@@ -248,12 +255,12 @@ flowchart TD
     classDef out fill:#fdffb6,stroke:#ffd6a5,stroke-width:3px,color:#5c4d5c,rx:12px,ry:12px,font-weight:bold
 
     T["Trim Video<br><i>Pose Detection</i>"]:::prep --> S["Stabilize Video<br><i>Crease Line Tracking</i>"]:::prep
-    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
-    S -- "Stable Frames" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
-    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
-    Seg -- "X, Y Pixels" --> K
-    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
-    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
+    S -- "<span style='border:1px solid #ffafcc; background:transparent; padding:2px 5px; border-radius:4px; color:#ffafcc; font-size:10px; font-weight:600;'>Stable Frames</span>" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
+    S -- "<span style='border:1px solid #ffafcc; background:transparent; padding:2px 5px; border-radius:4px; color:#ffafcc; font-size:10px; font-weight:600;'>Stable Frames</span>" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
+    D -- "<span style='border:1px solid #a2d2ff; background:transparent; padding:2px 5px; border-radius:4px; color:#a2d2ff; font-size:10px; font-weight:600;'>Z-Depth</span>" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "<span style='border:1px solid #a2d2ff; background:transparent; padding:2px 5px; border-radius:4px; color:#a2d2ff; font-size:10px; font-weight:600;'>X, Y Pixels</span>" --> K
+    K -- "<span style='border:1px solid #b492c7; background:transparent; padding:2px 5px; border-radius:4px; color:#b492c7; font-size:10px; font-weight:600;'>Raw 3D Points</span>" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
+    F == "<span style='border:1px solid #ffd6a5; background:transparent; padding:2px 5px; border-radius:4px; color:#ffd6a5; font-size:10px; font-weight:600;'>Smooth Trajectory</span>" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
 
     linkStyle 0,1,2,3,4,5 stroke:#b492c7,stroke-width:2px,stroke-dasharray: 5 5
     linkStyle 6 stroke:#ffd6a5,stroke-width:4px
@@ -268,12 +275,12 @@ flowchart TD
     classDef out fill:#000000,stroke:#000000,stroke-width:3px,color:#ffffff,rx:12px,ry:12px,font-weight:bold
 
     T["Trim Video<br><i>Pose Detection</i>"]:::prep --> S["Stabilize Video<br><i>Crease Line Tracking</i>"]:::prep
-    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
-    S -- "Stable Frames" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
-    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
-    Seg -- "X, Y Pixels" --> K
-    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
-    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
+    S -- "<span style='border:1px solid #000000; background:transparent; padding:2px 5px; border-radius:4px; color:#000000; font-size:10px; font-weight:600;'>Stable Frames</span>" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
+    S -- "<span style='border:1px solid #000000; background:transparent; padding:2px 5px; border-radius:4px; color:#000000; font-size:10px; font-weight:600;'>Stable Frames</span>" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
+    D -- "<span style='border:1px solid #333333; background:transparent; padding:2px 5px; border-radius:4px; color:#333333; font-size:10px; font-weight:600;'>Z-Depth</span>" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "<span style='border:1px solid #333333; background:transparent; padding:2px 5px; border-radius:4px; color:#333333; font-size:10px; font-weight:600;'>X, Y Pixels</span>" --> K
+    K -- "<span style='border:1px solid #666666; background:transparent; padding:2px 5px; border-radius:4px; color:#666666; font-size:10px; font-weight:600;'>Raw 3D Points</span>" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
+    F == "<span style='border:1px solid #000000; background:transparent; padding:2px 5px; border-radius:4px; color:#000000; font-size:10px; font-weight:600;'>Smooth Trajectory</span>" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
 
     linkStyle 0,1,2,3,4,5 stroke:#000000,stroke-width:2px,stroke-dasharray: 5 5
     linkStyle 6 stroke:#000000,stroke-width:4px
@@ -288,12 +295,12 @@ flowchart TD
     classDef out fill:#e8eaf6,stroke:#3949ab,stroke-width:3px,color:#1a237e,rx:12px,ry:12px,font-weight:bold
 
     T["Trim Video<br><i>Pose Detection</i>"]:::prep --> S["Stabilize Video<br><i>Crease Line Tracking</i>"]:::prep
-    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
-    S -- "Stable Frames" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
-    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
-    Seg -- "X, Y Pixels" --> K
-    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
-    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
+    S -- "<span style='border:1px solid #00acc1; background:transparent; padding:2px 5px; border-radius:4px; color:#00acc1; font-size:10px; font-weight:600;'>Stable Frames</span>" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
+    S -- "<span style='border:1px solid #00acc1; background:transparent; padding:2px 5px; border-radius:4px; color:#00acc1; font-size:10px; font-weight:600;'>Stable Frames</span>" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
+    D -- "<span style='border:1px solid #fb8c00; background:transparent; padding:2px 5px; border-radius:4px; color:#fb8c00; font-size:10px; font-weight:600;'>Z-Depth</span>" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "<span style='border:1px solid #fb8c00; background:transparent; padding:2px 5px; border-radius:4px; color:#fb8c00; font-size:10px; font-weight:600;'>X, Y Pixels</span>" --> K
+    K -- "<span style='border:1px solid #8e24aa; background:transparent; padding:2px 5px; border-radius:4px; color:#8e24aa; font-size:10px; font-weight:600;'>Raw 3D Points</span>" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
+    F == "<span style='border:1px solid #3949ab; background:transparent; padding:2px 5px; border-radius:4px; color:#3949ab; font-size:10px; font-weight:600;'>Smooth Trajectory</span>" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
 
     linkStyle 0,1,2,3,4,5 stroke:#00acc1,stroke-width:2px,stroke-dasharray: 5 5
     linkStyle 6 stroke:#3949ab,stroke-width:4px
@@ -308,12 +315,12 @@ flowchart TD
     classDef out fill:#c25437,stroke:#8c3420,stroke-width:3px,color:#ffffff,rx:12px,ry:12px,font-weight:bold
 
     T["Trim Video<br><i>Pose Detection</i>"]:::prep --> S["Stabilize Video<br><i>Crease Line Tracking</i>"]:::prep
-    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
-    S -- "Stable Frames" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
-    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
-    Seg -- "X, Y Pixels" --> K
-    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
-    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
+    S -- "<span style='border:1px solid #f3c5b5; background:transparent; padding:2px 5px; border-radius:4px; color:#f3c5b5; font-size:10px; font-weight:600;'>Stable Frames</span>" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
+    S -- "<span style='border:1px solid #f3c5b5; background:transparent; padding:2px 5px; border-radius:4px; color:#f3c5b5; font-size:10px; font-weight:600;'>Stable Frames</span>" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
+    D -- "<span style='border:1px solid #e3856b; background:transparent; padding:2px 5px; border-radius:4px; color:#e3856b; font-size:10px; font-weight:600;'>Z-Depth</span>" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "<span style='border:1px solid #e3856b; background:transparent; padding:2px 5px; border-radius:4px; color:#e3856b; font-size:10px; font-weight:600;'>X, Y Pixels</span>" --> K
+    K -- "<span style='border:1px solid #c25437; background:transparent; padding:2px 5px; border-radius:4px; color:#c25437; font-size:10px; font-weight:600;'>Raw 3D Points</span>" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
+    F == "<span style='border:1px solid #8c3420; background:transparent; padding:2px 5px; border-radius:4px; color:#8c3420; font-size:10px; font-weight:600;'>Smooth Trajectory</span>" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
 
     linkStyle 0,1,2,3,4,5 stroke:#e3856b,stroke-width:2px,stroke-dasharray: 5 5
     linkStyle 6 stroke:#8c3420,stroke-width:4px
@@ -328,12 +335,12 @@ flowchart TD
     classDef out fill:#caf0f8,stroke:#ffffff,stroke-width:3px,color:#03045e,rx:12px,ry:12px,font-weight:bold
 
     T["Trim Video<br><i>Pose Detection</i>"]:::prep --> S["Stabilize Video<br><i>Crease Line Tracking</i>"]:::prep
-    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
-    S -- "Stable Frames" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
-    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
-    Seg -- "X, Y Pixels" --> K
-    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
-    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
+    S -- "<span style='border:1px solid #0077b6; background:transparent; padding:2px 5px; border-radius:4px; color:#0077b6; font-size:10px; font-weight:600;'>Stable Frames</span>" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
+    S -- "<span style='border:1px solid #0077b6; background:transparent; padding:2px 5px; border-radius:4px; color:#0077b6; font-size:10px; font-weight:600;'>Stable Frames</span>" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
+    D -- "<span style='border:1px solid #00b4d8; background:transparent; padding:2px 5px; border-radius:4px; color:#00b4d8; font-size:10px; font-weight:600;'>Z-Depth</span>" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "<span style='border:1px solid #00b4d8; background:transparent; padding:2px 5px; border-radius:4px; color:#00b4d8; font-size:10px; font-weight:600;'>X, Y Pixels</span>" --> K
+    K -- "<span style='border:1px solid #90e0ef; background:transparent; padding:2px 5px; border-radius:4px; color:#90e0ef; font-size:10px; font-weight:600;'>Raw 3D Points</span>" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
+    F == "<span style='border:1px solid #ffffff; background:transparent; padding:2px 5px; border-radius:4px; color:#ffffff; font-size:10px; font-weight:600;'>Smooth Trajectory</span>" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
 
     linkStyle 0,1,2,3,4,5 stroke:#90e0ef,stroke-width:2px,stroke-dasharray: 5 5
     linkStyle 6 stroke:#caf0f8,stroke-width:4px
