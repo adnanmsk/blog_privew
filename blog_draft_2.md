@@ -505,6 +505,14 @@ The pipeline is configured through a single `config.py` file containing over 150
 
 --- -->
 
+## Conclusion: Beyond Cricket
+
+The goal of this project was to extract a 3D swing plane from a 2D smartphone video to see if we could bypass the need for physical sensors. By chaining together off-the-shelf vision models with physics-based filtering, the pipeline demonstrates a practical way to replace expensive hardware with software.
+
+But this logic extends far beyond cricket. The exact same approach—tracking an object, estimating its depth, and smoothing the trajectory in 3D—can be used in entirely different fields. For example, it can extract 3D spatial data from standard videos to train robotic AI (imitation learning). It could also track tool paths on a manufacturing floor or analyze a patient's range of motion in physical therapy.
+
+Ultimately, this pipeline is a blueprint for how we can use AI to pull structured 3D data out of standard 2D video, reducing our reliance on specialized hardware.
+
 ## References
 
 1. Ultralytics YOLO - https://docs.ultralytics.com/
