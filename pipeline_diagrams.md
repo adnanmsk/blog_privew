@@ -1,4 +1,4 @@
-# Pipeline Diagram Options
+<!-- # Pipeline Diagram Options
 
 Here are upgraded, premium-styled Mermaid diagrams for the Bat Swing Plane Pipeline. They use custom colors, rounded corners, and shapes to look significantly better than the default basic layout! 
 
@@ -15,7 +15,7 @@ flowchart TD
     classDef data fill:#003049,stroke:#669bbc,stroke-width:2px,color:#fff,rx:15px,ry:15px;
     classDef output fill:#006400,stroke:#38b000,stroke-width:3px,color:#fff,rx:10px,ry:10px,font-weight:bold;
 
-    Vid[/"Raw Video Input"/]:::input --> S1
+    <!-- Vid[/"Raw Video Input"/]:::input --> S1
     
     subgraph Pre-Processing
     S1("1. Trim Video (YOLO11x + Pose)"):::stage --> Clip[("1-Sec Action Clip")]:::data
@@ -47,7 +47,7 @@ flowchart TD
     %% Dashed Flow Lines
     linkStyle 0,1,2,3,4,5,6,7,8,9,10,11 stroke:#fff,stroke-width:2px,stroke-dasharray: 5 5;
     linkStyle 12 stroke:#38b000,stroke-width:4px;
-```
+``` -->
 
 ---
 
@@ -140,7 +140,7 @@ graph TD
     %% Animated Dashed Flow Lines
     linkStyle 0,1,2,3,4,5 stroke:#fff,stroke-width:2px,stroke-dasharray: 5 5;
     linkStyle 6 stroke:#ff7675,stroke-width:4px,stroke-dasharray: 10 5;
-```
+``` -->
 
 ---
 
@@ -172,7 +172,7 @@ graph TD
     linkStyle 6 stroke:#ff7675,stroke-width:4px,stroke-dasharray: 10 5;
 ```
 ```mermaid
-flowchart LR
+flowchart TD
     %% Clean, modern color palette for standard Markdown rendering
     classDef prep fill:#f0f4f8,stroke:#3b82f6,stroke-width:2px,color:#1e293b,rx:8px,ry:8px
     classDef infer fill:#f0fdf4,stroke:#10b981,stroke-width:2px,color:#1e293b,rx:8px,ry:8px
@@ -195,171 +195,4 @@ flowchart LR
     %% Link styling designed to be visible on any Markdown background
     linkStyle 0,1,2,3,4,5 stroke:#64748b,stroke-width:2px,stroke-dasharray: 5 5
     linkStyle 6 stroke:#ef4444,stroke-width:4px
-```
-
-# Comprehensive IT Support Call Flow
-
-## Overview
-
-This process log details the automated and human-agent handling paths for incoming calls to the IT support center. It illustrates both the Standard and High Volume call flows, with a specific focus on the complex decision branching during peak hours and the subsequent voicemail handling protocols.
-
-## Process Flow Log (Vertical View)
-
-This vertical diagram provides a step-by-step sequential view of the call handling process, stacked top-to-bottom for easy following as a 'log' of events.
-
----
-**Standard Call Flow**
-*A simple path where an available technician handles the call.*
-
-*   **1. Start Call**
-    *   *Description:* Call is initiated by the user.
-*   **2. Standard Call Queue** (Group: STANDARD CALL FLOW)
-    *   *Description:* Caller enters the general support queue for initial triaging or standard requests.
-*   **3. Decision: Technician Available?**
-    *   *Yes:* Call is immediately picked up. -> **[GO TO: Call Answered]**
-    *   *No:* Wait time exists, and the user is offered a callback or voicemail option. -> **[GO TO: Prompt to Voicemail]**
-
----
-**High Volume Call Flow**
-*Detailed branching path for high call volumes, with menu-based routing to specialized agents.*
-
-*   **4. Play Menu Options** (Group: HIGH VOLUME CALL FLOW)
-    *   *Description:* Automated attendant plays initial greeting and main menu options.
-*   **5. Decision: Menu Selection**
-    *   **Selection 1: Password Reset** (Group: PASSWORD QUEUE)
-        *   *Queue:* User enters the specialized Password Reset Queue.
-        *   *Decision: Password Agent Available?*
-            *   *Yes:* Call Answered -> **[GO TO: Call Answered]**
-            *   *No:* Wait time exists. -> **[GO TO: Password Voicemail]**
-    *   **Selection 2: Software Access** (Group: SOFTWARE QUEUE)
-        *   *Queue:* User enters the specialized Software Access Queue.
-        *   *Decision: Software Agent Available?*
-            *   *Yes:* Call Answered -> **[GO TO: Call Answered]**
-            *   *No:* Wait time exists. -> **[GO TO: Software Voicemail]**
-    *   **Selection 3: Other Issues** (Group: OTHER QUEUE)
-        *   *Queue:* User enters the generalized "Other Issues" Queue.
-        *   *Decision: Other Agent Available?*
-            *   *Yes:* Call Answered -> **[GO TO: Call Answered]**
-            *   *No:* Wait time exists. -> **[GO TO: Other Voicemail]**
-
----
-**Voicemail Handling Process**
-*The standard back-end processing for all unserviced calls.*
-
-*   **6. Caller Leaves Voicemail** (Group: VOICEMAIL HANDLING)
-    *   *Inputs:* All 'No' outcomes from previous queues (Standard Voicemail, Password Voicemail, Software Voicemail, Other Voicemail) merge here.
-    *   *Description:* User records their issue via the automated prompt.
-*   **7. Ticket Auto Created**
-    *   *Description:* The voicemail system triggers an automated service that generates an IT support ticket, attaching the audio file.
-*   **8. Technician Follows Up**
-    *   *Description:* A technician claims the ticket and contacts the user for resolution.
-*   **9. Issue Resolved**
-    *   *Description:* The issue is confirmed as fixed, and the ticket is closed.
-
-## Mermaid Diagram Code
-
-The following Mermaid.js code generates the vertical process diagram for use in compatible markdown editors and GitHub.
-
-```mermaid
-graph TD
-
-%% Define color classes for the light theme
-classDef blueFill fill:#E6F7FF,stroke:#1890FF,color:#000,stroke-width:1.5px
-classDef greenFill fill:#F6FFED,stroke:#52C41A,color:#000,stroke-width:1.5px
-classDef orangeFill fill:#FFFBE6,stroke:#FAAD14,color:#000,stroke-width:1.5px
-classDef cyanFill fill:#E6FFFB,stroke:#13C2C2,color:#000,stroke-width:1.5px
-classDef purpleFill fill:#F9F0FF,stroke:#722ED1,color:#000,stroke-width:1.5px
-classDef greyFill fill:#F5F5F5,stroke:#D9D9D9,color:#000,stroke-width:1.5px
-classDef darkRedFill fill:#FFF1F0,stroke:#F5222D,color:#000,stroke-width:1.5px
-
-%% Start Call Node
-N_START(:phone: Start Call)
-N_START --> |Call Incoming| SG_STANDARD
-
-%% --- STANDARD CALL FLOW Subgraph ---
-subgraph SG_STANDARD [STANDARD CALL FLOW]
-    direction TD
-    style SG_STANDARD stroke:#E6F7FF,fill:#FFF
-    N_S_Q(:headset: Standard Call Queue) --> N_S_A_D{Available?}
-    N_S_A_D -- Yes --> N_S_ANS(:checkmark: Call Answered)
-    N_S_A_D -- No --> N_S_VOICEMAIL(:microphone: Prompt to Voicemail)
-end
-
-class N_S_Q blueFill
-class N_S_A_D blueFill
-class N_S_ANS greenFill
-class N_S_VOICEMAIL orangeFill
-
-%% Start Call feeds into both flows
-N_START --> |High Volume Detect| SG_HIGH_VOLUME
-
-%% --- HIGH VOLUME CALL FLOW Subgraph ---
-subgraph SG_HIGH_VOLUME [HIGH VOLUME CALL FLOW]
-    direction TD
-    style SG_HIGH_VOLUME stroke:#FFFBE6,fill:#FFF
-    N_HV_P_M(:list: Play Menu Options) --> N_HV_M_S{Selection}
-    
-    N_HV_M_S -- 1 --> SG_PASSWORD
-    N_HV_M_S -- 2 --> SG_SOFTWARE
-    N_HV_M_S -- 3 --> SG_OTHER
-
-    %% Nested Parallel Password Queue
-    subgraph SG_PASSWORD [PASSWORD QUEUE]
-        direction TD
-        style SG_PASSWORD stroke:#F9F0FF,fill:#FFF
-        N_HV_P_Q(:key: Password Reset Queue) --> N_HV_P_A_D{Available?}
-        N_HV_P_A_D -- Yes --> N_HV_P_ANS(:checkmark: Ans)
-        N_HV_P_A_D -- No --> N_HV_P_VOICEMAIL(:microphone: Voicemail)
-    end
-    
-    %% Nested Parallel Software Queue
-    subgraph SG_SOFTWARE [SOFTWARE QUEUE]
-        direction TD
-        style SG_SOFTWARE stroke:#E6FFFB,fill:#FFF
-        N_HV_S_Q(:computer: Software Access Queue) --> N_HV_S_A_D{Available?}
-        N_HV_S_A_D -- Yes --> N_HV_S_ANS(:checkmark: Ans)
-        N_HV_S_A_D -- No --> N_HV_S_VOICEMAIL(:microphone: Voicemail)
-    end
-    
-    %% Nested Parallel Other Queue
-    subgraph SG_OTHER [OTHER QUEUE]
-        direction TD
-        style SG_OTHER stroke:#F5F5F5,fill:#FFF
-        N_HV_O_Q(:gear: Other Issues Queue) --> N_HV_O_A_D{Available?}
-        N_HV_O_A_D -- Yes --> N_HV_O_ANS(:checkmark: Ans)
-        N_HV_O_A_D -- No --> N_HV_O_VOICEMAIL(:microphone: Voicemail)
-    end
-
-end
-
-class N_HV_P_M orangeFill
-class N_HV_M_S orangeFill
-class N_HV_P_Q,N_HV_P_A_D purpleFill
-class N_HV_P_ANS greenFill
-class N_HV_P_VOICEMAIL orangeFill
-class N_HV_S_Q,N_HV_S_A_D cyanFill
-class N_HV_S_ANS greenFill
-class N_HV_S_VOICEMAIL orangeFill
-class N_HV_O_Q,N_HV_O_A_D greyFill
-class N_HV_O_ANS greenFill
-class N_HV_O_VOICEMAIL orangeFill
-
-%% --- VOICEMAIL HANDLING Subgraph ---
-%% Connect inputs to the main handling block
-N_S_VOICEMAIL --> SG_VOICEMAIL
-N_HV_P_VOICEMAIL --> SG_VOICEMAIL
-N_HV_S_VOICEMAIL --> SG_VOICEMAIL
-N_HV_O_VOICEMAIL --> SG_VOICEMAIL
-
-subgraph SG_VOICEMAIL [VOICEMAIL HANDLING PROCESS]
-    direction TD
-    style SG_VOICEMAIL stroke:#FFF1F0,fill:#FFF
-    N_V_L(:microphone: Caller Leaves Voicemail) --> N_V_T(:page_facing_up: Ticket Auto Created)
-    N_V_T --> N_V_F(:construction_worker: Technician Follows Up)
-    N_V_F --> N_V_R(:checkmark: Issue Resolved)
-end
-
-class N_V_L,N_V_T,N_V_F darkRedFill
-class N_V_R greenFill
-
 ```
