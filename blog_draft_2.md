@@ -279,9 +279,7 @@ This dual-session approach isn't cricket-specific. It's a general computer visio
 <p align="center">
   <img src="assets/stage3b_subtraction.gif" alt="SAM Mask Subtraction Trick" width="100%" />
 </p>
-<p align="center">
-  <i>Left: Raw Bat Mask &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Center: Wicket Mask &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Right: Final Clean Mask</i>
-</p>
+
 
 [Watch the high-res 3-Panel Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage3b_subtraction.mp4)
 
@@ -421,9 +419,7 @@ By rendering from three different camera angles (e.g., side-profile, and standar
 <p align="center">
   <img src="assets/hero_3d_swing_plane.gif" alt="Hero 3D Swing Plane" width="100%" />
 </p>
-<p align="center">
-  <i>Left: Stabilized &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Center: 3D Front View &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Right: 3D Side View</i>
-</p>
+
 
 [Watch the high-res 3D Swing Plane Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/hero_3d_swing_plane.mp4)
 
