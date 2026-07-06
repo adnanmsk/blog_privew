@@ -58,17 +58,17 @@ graph TD
     classDef phys fill:#064e3b,stroke:#10b981,color:#fff,stroke-width:3px,rx:5px,ry:5px;
     classDef out fill:#881337,stroke:#f43f5e,color:#fff,stroke-width:4px,rx:8px,ry:8px,font-weight:bold;
 
-    T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Video<br><i>Grounding DINO + SAM 2</i>"]:::prep
+    T["Trim Video<br><i>Pose Detection</i>"]:::prep --> S["Stabilize Video<br><i>Crease Line Tracking</i>"]:::prep
     
-    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
-    S -- "Stable Frames" --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
+    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
+    S -- "Stable Frames" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
     
     D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
     Seg -- "X, Y Pixels" --> K
     
-    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Kalman RTS</i>"]:::phys
+    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
     
-    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"]:::out
+    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
 
     %% Animation like Option 3
     linkStyle 0,1,2,3,4,5 stroke:#fff,stroke-width:2px,stroke-dasharray: 8 4;
@@ -85,8 +85,8 @@ All six models are loaded once (~10 seconds) and reused across every video. Ther
 The input video clips are typically very short-around 1 to 2 seconds long. However, they often contain extra frames at the start or end where the batsman is out of frame or simply standing still. Stage 1 automatically crops the video in time, isolating *only* the active window where the shot is actually being played.
 
 The pipeline processes each frame using two models simultaneously:
-* **YOLO11x** detects the bat.
-* **YOLOv8x-Pose** detects people and extracts their skeletal keypoints (like their wrists).
+* An **object detection model** detects the bat.
+* A **pose estimation model** detects people and extracts their skeletal keypoints (like their wrists).
 
 ### Tracing the Batsman: Match Scores
 
@@ -151,13 +151,13 @@ Every pitch has two white crease lines painted on the ground (the bowling and ba
 
 ### Finding the Lines with Zero Training Data
 
-To find these lines without training a custom model, we use **Grounding DINO**-an object detection model that understands English. We feed it a simple text query:
+To find these lines without training a custom model, we use a **text-to-object detection model** that understands English. We feed it a simple text query:
 
 ```text
 "the vertical white line . white boundary line"
 ```
 
-Even though Grounding DINO wasn't trained specifically on cricket pitches, it locates the white lines on the ground. Once it finds them in a single "golden frame," we feed those locations into **SAM 2** (Segment Anything Model 2). SAM 2 is designed for video; we give it a few points on the lines, and it automatically tracks and outlines the shapes of those crease lines forward and backward through the entire clip.
+Even though this detection model wasn't trained specifically on cricket pitches, it locates the white lines on the ground. Once it finds them in a single "golden frame," we feed those locations into a **video object tracking model**. We give it a few points on the lines, and it automatically tracks and outlines the shapes of those crease lines forward and backward through the entire clip.
 
 <p align="center">
   <img src="assets/stage2_pitch_detected.gif" alt="Pitch Stabilization Bounding Box" width="100%" />
@@ -167,7 +167,7 @@ Even though Grounding DINO wasn't trained specifically on cricket pitches, it lo
 
 ### Warping the Coordinate Space
 
-Once SAM 2 gives us the pixel coordinates of the left and right crease lines for every frame (`left_x` and `right_x`), we lock them in place using a geometric transformation.
+Once the tracking model gives us the pixel coordinates of the left and right crease lines for every frame (`left_x` and `right_x`), we lock them in place using a geometric transformation.
 
 Here is the exact code that calculates the warp matrix:
 
@@ -199,7 +199,7 @@ This mathematical "rubber sheet" transformation normalizes every frame. The came
 
 A standard video captures a flat 2D image without a Z-axis. But we need depth to reconstruct a 3D trajectory.
 
-To recover this missing dimension, we use **Depth Anything V2 Large**, a state-of-the-art transformer trained on millions of images to predict relative depth. It doesn't give us absolute distances in meters, but it calculates exactly which pixels are closer to the camera and which are farther away.
+To recover this missing dimension, we use a **depth estimation model**, a state-of-the-art transformer trained on millions of images to predict relative depth. It doesn't give us absolute distances in meters, but it calculates exactly which pixels are closer to the camera and which are farther away.
 
 ### The "Edge Hardening" Hack
 
@@ -240,15 +240,15 @@ depth_map[black_mask] = 0.0
 
 This is where the real engineering happened.
 
-**SAM 3.1 Multiplex** is a massive video segmentation model that can track objects across frames with remarkable consistency. You give it a text prompt like `"bat"` and it finds the bat in one frame and tracks it through the entire video.
+A **video object segmentation model** can track objects across frames with remarkable consistency. You give it a text prompt like `"bat"`, and it finds the bat in one frame and tracks it through the entire video.
 
 Except, it doesn't just find the bat. It also finds the wicket stumps. 
 
-To a segmentation model, a cricket bat and wicket stumps look nearly identical: long, thin, vertical objects made of wood. In early experiments, when prompted to find the "bat," SAM would confidently highlight the wicket stumps as well, treating them as if they were bats.
+To a segmentation model, a cricket bat and wicket stumps look nearly identical: long, thin, vertical objects made of wood. In early experiments, when prompted to find the "bat," the tracking model would confidently highlight the wicket stumps as well, treating them as if they were bats.
 
 ### The Dual-Session Subtraction Trick
 
-The fix is to run SAM twice in two separate sessions, and then use logical subtraction to clean the masks. 
+The fix is to run the model twice in two separate sessions, and then use logical subtraction to clean the masks. 
 
 ```python
 # Session 1: Track the bat (which SAM often confuses with stumps)
@@ -317,7 +317,7 @@ But there is a catch: math doesn't know which end is the handle and which end is
 
 ### Wrist Tracking for Classification
 
-To solve this, we bring back **YOLOv8-Pose**. We use it to detect the batsman's wrists (COCO keypoints 9 and 10). We calculate the midpoint between the left and right wrists to find the player's grip.
+To solve this, we bring back the **pose estimation model**. We use it to detect the batsman's wrists (COCO keypoints 9 and 10). We calculate the midpoint between the left and right wrists to find the player's grip.
 
 The endpoint of the bat's axis that is closest to this grip is classified as the **handle**. The opposite end is the **bat tip**.
 
@@ -457,8 +457,8 @@ The pipeline is highly robust, successfully handling:
 
 No engineering project is complete without a list of things that broke along the way.
 
-### SAM Tracking the Wrong Object
-In early versions, SAM 3.1 locked onto the wicket stumps instead of the bat in ~20% of videos. The stumps and bat are both long, thin, wooden objects. The dual-session subtraction trick (Stage 3b) solved this completely.
+### Tracking the Wrong Object
+In early versions, the video segmentation model locked onto the wicket stumps instead of the bat in ~20% of videos. The stumps and bat are both long, thin, wooden objects. The dual-session subtraction trick (Stage 3b) solved this completely.
 
 ### Camera Shake Corrupting Depth
 Without pitch stabilization, the sampled Z-coordinates drifted wildly between frames. The bat hadn't moved in the real world, but the *camera* had moved-shifting the bat to a different part of the depth map and giving it a different relative depth. Stabilizing the footage to the crease lines (Stage 2) eliminated this class of error entirely.
@@ -500,7 +500,7 @@ python run_single.py --input your_cricket_video.mp4
 python run_batch.py --input-dir ./your_videos/ --output-dir ./results/
 ```
 
-The pipeline is configured through a single `config.py` file containing over 150 tunable constants - everything from YOLO confidence thresholds to Kalman filter noise parameters. If something doesn't work on your videos, the fix is almost certainly a config tweak, not a code change.
+The pipeline is configured through a single `config.py` file containing over 150 tunable constants - everything from object detection confidence thresholds to Kalman filter noise parameters. If something doesn't work on your videos, the fix is almost certainly a config tweak, not a code change.
 
 --- -->
 
