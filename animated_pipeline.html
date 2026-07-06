@@ -30,9 +30,12 @@
 
         .node {
             position: absolute;
+            width: 180px;
+            height: 70px;
+            box-sizing: border-box;
             background: rgba(31, 41, 55, 0.8);
             border: 2px solid #374151;
-            padding: 15px 20px;
+            padding: 12px 15px;
             border-radius: 12px;
             text-align: center;
             font-weight: bold;
@@ -41,6 +44,10 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .node span {
@@ -57,17 +64,17 @@
         .phys { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
         .out { border-color: #ec4899; box-shadow: 0 0 20px rgba(236, 72, 153, 0.4); }
 
-        /* Node Positions */
-        #n1 { top: 60px; left: 350px; }
-        #n2 { top: 160px; left: 350px; }
+        /* Node Positions - PERFECTLY CENTERED (Center Line at 500px) */
+        #n1 { top: 50px; left: 410px; }
+        #n2 { top: 170px; left: 410px; }
         
-        #n3a { top: 280px; left: 150px; }
-        #n3b { top: 280px; left: 550px; }
+        #n3a { top: 290px; left: 210px; }
+        #n3b { top: 290px; left: 610px; }
         
-        #n4 { top: 400px; left: 350px; }
-        #n5 { top: 480px; left: 350px; }
+        #n4 { top: 410px; left: 410px; }
+        #n5 { top: 510px; left: 410px; }
         
-        #n6 { top: 480px; left: 650px; }
+        #n6 { top: 510px; left: 680px; }
 
         /* Animated Pulses */
         .node:hover {
@@ -121,26 +128,56 @@
             background: #fff;
             border-radius: 50%;
             position: absolute;
-            box-shadow: 0 0 10px #fff, 0 0 20px #00f5d4;
             z-index: 5;
+            transform: translate(-50%, -50%);
         }
 
-        /* Keyframes for packets */
-        @keyframes move1 { 0% {top:110px; left:440px;} 100% {top:160px; left:440px;} }
-        @keyframes move2a { 0% {top:210px; left:440px;} 100% {top:280px; left:250px;} }
-        @keyframes move2b { 0% {top:210px; left:440px;} 100% {top:280px; left:650px;} }
-        @keyframes move3a { 0% {top:330px; left:250px;} 100% {top:400px; left:440px;} }
-        @keyframes move3b { 0% {top:330px; left:650px;} 100% {top:400px; left:440px;} }
-        @keyframes move4 { 0% {top:450px; left:440px;} 100% {top:480px; left:440px;} }
-        @keyframes move5 { 0% {top:505px; left:520px;} 100% {top:505px; left:650px;} }
+        /* Packet Animations using CSS offset-path (Perfect Alignment!) */
+        .p1 {
+            offset-path: path('M 500 120 L 500 170');
+            animation: move-packet 1s infinite linear;
+            box-shadow: 0 0 10px #fff, 0 0 20px #00f5d4;
+        }
+        .p2a {
+            offset-path: path('M 500 240 Q 500 265 300 290');
+            animation: move-packet 1.5s infinite linear;
+            box-shadow: 0 0 10px #fff, 0 0 20px #f59e0b;
+        }
+        .p2b {
+            offset-path: path('M 500 240 Q 500 265 700 290');
+            animation: move-packet 1.5s infinite linear;
+            box-shadow: 0 0 10px #fff, 0 0 20px #3b82f6;
+        }
+        .p3a {
+            offset-path: path('M 300 360 Q 300 385 500 410');
+            animation: move-packet 1.5s infinite linear;
+            box-shadow: 0 0 10px #fff, 0 0 20px #10b981;
+        }
+        .p3b {
+            offset-path: path('M 700 360 Q 700 385 500 410');
+            animation: move-packet 1.5s infinite linear;
+            box-shadow: 0 0 10px #fff, 0 0 20px #10b981;
+        }
+        .p4 {
+            offset-path: path('M 500 480 L 500 510');
+            animation: move-packet 0.8s infinite linear;
+            box-shadow: 0 0 10px #fff, 0 0 20px #ec4899;
+        }
+        .p5 {
+            offset-path: path('M 590 545 L 680 545');
+            animation: move-packet 1.2s infinite linear;
+            background: #ec4899;
+            box-shadow: 0 0 10px #fff, 0 0 30px #ec4899;
+        }
 
-        .p1 { animation: move1 1s infinite; }
-        .p2a { animation: move2a 1.5s infinite; box-shadow: 0 0 10px #fff, 0 0 20px #f59e0b;}
-        .p2b { animation: move2b 1.5s infinite; box-shadow: 0 0 10px #fff, 0 0 20px #3b82f6;}
-        .p3a { animation: move3a 1.5s infinite; box-shadow: 0 0 10px #fff, 0 0 20px #10b981;}
-        .p3b { animation: move3b 1.5s infinite; box-shadow: 0 0 10px #fff, 0 0 20px #10b981;}
-        .p4 { animation: move4 0.8s infinite; box-shadow: 0 0 10px #fff, 0 0 20px #ec4899;}
-        .p5 { animation: move5 1.2s infinite; background:#ec4899; box-shadow: 0 0 10px #fff, 0 0 30px #ec4899;}
+        @keyframes move-packet {
+            0% {
+                offset-distance: 0%;
+            }
+            100% {
+                offset-distance: 100%;
+            }
+        }
 
         h2 {
             text-align: center;
@@ -160,17 +197,17 @@
         <!-- Background SVG Lines -->
         <svg>
             <!-- 1 to 2 -->
-            <path d="M 440 110 L 440 160" class="line animated-line-slow" />
+            <path d="M 500 120 L 500 170" class="line animated-line-slow" />
             <!-- 2 to 3a and 3b -->
-            <path d="M 440 210 Q 440 245 250 280" class="line animated-line" />
-            <path d="M 440 210 Q 440 245 650 280" class="line animated-line" />
+            <path d="M 500 240 Q 500 265 300 290" class="line animated-line" />
+            <path d="M 500 240 Q 500 265 700 290" class="line animated-line" />
             <!-- 3a and 3b to 4 -->
-            <path d="M 250 330 Q 250 365 440 400" class="line animated-line" />
-            <path d="M 650 330 Q 650 365 440 400" class="line animated-line" />
+            <path d="M 300 360 Q 300 385 500 410" class="line animated-line" />
+            <path d="M 700 360 Q 700 385 500 410" class="line animated-line" />
             <!-- 4 to 5 -->
-            <path d="M 440 450 L 440 480" class="line animated-line" />
+            <path d="M 500 480 L 500 510" class="line animated-line" />
             <!-- 5 to 6 -->
-            <path d="M 520 505 L 650 505" class="line animated-line-fast" />
+            <path d="M 590 545 L 680 545" class="line animated-line-fast" />
         </svg>
 
         <!-- Glowing Packets -->
