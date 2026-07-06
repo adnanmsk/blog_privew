@@ -18,7 +18,7 @@ Because a swing happens in about 150 milliseconds, it is impossible for the huma
 
 While these hardware solutions are accurate, they are incredibly expensive, confined to specialized facilities, and attaching a physical sensor alters the weight and feel of the bat.
 
-This got me thinking: What if we didn't need hardware at all?
+This got us thinking: What if we didn't need hardware at all?
 
 > **Can we map the exact 3D bat swing plane from a single, shaky 2D smartphone video using only AI models?**
 
@@ -35,7 +35,7 @@ Instead of relying on hardware markers or multiple cameras, the Bat Swing Plane 
 * **Step 1: Trimming & Stabilizing:** The pipeline finds the window of the swing, trims away the rest of the footage, and cancels out camera shake by locking onto the pitch's crease lines.
 * **Step 2: Isolating the Bat:** It tracks and segments the bat in every frame, creating a pixel-perfect mask.
 * **Step 3: Estimating Depth:** It generates a depth map for each frame, estimating how far the bat is from the camera to help recover the missing third dimension.
-* **Step 4: Finding Keypoints in 3D:** It calculates the coordinates of the bat's handle and tip(end of the bat), combining them with the depth map to get raw 3D positions.
+* **Step 4: Finding Keypoints in 3D:** It calculates the coordinates of the bat's handle and tip (end of the bat), combining them with the depth map to get raw 3D positions.
 * **Step 5: Physics Smoothing & Rendering:** A physical motion model (a Kalman filter) smooths out depth noise and draws the swing path as a continuous 3D ribbon.
 
 This pipeline runs locally on a consumer GPU, processing a typical swing clip in about 10-15 seconds.
@@ -341,7 +341,7 @@ Before doing any advanced math, we filter out impossible depth values. For every
 
 ### The 9-State Kalman RTS Smoother
 
-To turn these noisy, gap-filled observations into a silky-smooth 3D trajectory, I use a **Rauch-Tung-Striebel (RTS) smoother** - a two-pass extension of the Kalman filter.
+To turn these noisy, gap-filled observations into a silky-smooth 3D trajectory, we use a **Rauch-Tung-Striebel (RTS) smoother** - a two-pass extension of the Kalman filter.
 
 The state vector tracks position, velocity, and acceleration in all three dimensions:
 
@@ -463,7 +463,7 @@ Without pitch stabilization, the sampled Z-coordinates drifted wildly between fr
 
 ## The Full Model Stack (Zero Fine-Tuning!)
 
-One of the most impressive parts of this pipeline is that it requires **zero fine-tuning**. I didn't train a single model on a custom cricket dataset. Every single one of these massive foundation models is running completely zero-shot.
+One of the most impressive parts of this pipeline is that it requires **zero fine-tuning**. We didn't train a single model on a custom cricket dataset. Every single one of these massive foundation models is running completely zero-shot.
 
 | Model | Parameters | Size | Role |
 |-------|-----------|------|------|
