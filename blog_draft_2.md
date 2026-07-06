@@ -51,6 +51,7 @@ This pipeline runs locally on a consumer GPU, processing a typical swing clip in
 The pipeline is split into 6 stages. Here's the full stack:
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'edgeLabelBackground':'transparent' }}}%%
 graph TD
     %% Custom Premium Styles
     classDef prep fill:#3b0764,stroke:#a855f7,color:#fff,stroke-width:3px,rx:5px,ry:5px;
@@ -60,15 +61,15 @@ graph TD
 
     T["Trim Video<br><i>Pose Detection</i>"]:::prep --> S["Stabilize Video<br><i>Crease Line Tracking</i>"]:::prep
     
-    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
-    S -- "Stable Frames" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
+    S -- "<span style='background:rgba(11,15,25,0.7); border:1px solid #a855f7; color:#a855f7; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:bold; display:inline-block;'>Stable Frames</span>" --> D["Depth Maps<br><i>Depth Estimation</i>"]:::infer
+    S -- "<span style='background:rgba(11,15,25,0.7); border:1px solid #a855f7; color:#a855f7; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:bold; display:inline-block;'>Stable Frames</span>" --> Seg["Bat Mask<br><i>Object Tracking</i>"]:::infer
     
-    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
-    Seg -- "X, Y Pixels" --> K
+    D -- "<span style='background:rgba(11,15,25,0.7); border:1px solid #06b6d4; color:#06b6d4; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:bold; display:inline-block;'>Z-Depth</span>" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "<span style='background:rgba(11,15,25,0.7); border:1px solid #06b6d4; color:#06b6d4; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:bold; display:inline-block;'>X, Y Pixels</span>" --> K
     
-    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
+    K -- "<span style='background:rgba(11,15,25,0.7); border:1px solid #10b981; color:#10b981; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:bold; display:inline-block;'>Raw 3D Points</span>" --> F["3D Fusion<br><i>Physics-based Smoothing</i>"]:::phys
     
-    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
+    F -- "<span style='background:rgba(11,15,25,0.7); border:1px solid #f43f5e; color:#f43f5e; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:bold; display:inline-block;'>Smooth Trajectory</span>" --> R["Render Bat Swing Plane<br><i>3D Visualization</i>"]:::out
 
     %% Animation like Option 3
     linkStyle 0,1,2,3,4,5 stroke:#fff,stroke-width:2px,stroke-dasharray: 8 4;
