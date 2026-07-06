@@ -184,38 +184,38 @@
 
         <!-- Nodes -->
         <div class="node prep" id="n1">
-            🎬 1. Trim Video
-            <span>YOLO11x + Pose</span>
+            1. Trim Video
+            <span>Pose Detection</span>
         </div>
 
         <div class="node prep" id="n2">
-            ⚖️ 2. Stabilize Camera
-            <span>Grounding DINO + SAM 2</span>
+            2. Stabilize Camera
+            <span>Crease Line Tracking</span>
         </div>
 
         <div class="node infer" id="n3a">
-            👁️ 3a. Depth Maps
-            <span>Depth Anything V2</span>
+            3a. Depth Maps
+            <span>Depth Estimation</span>
         </div>
 
         <div class="node infer" id="n3b">
-            🦇 3b. Bat Mask
-            <span>SAM 3.1</span>
+            3b. Bat Mask
+            <span>Object Tracking</span>
         </div>
 
         <div class="node phys" id="n4">
-            📏 4. 3D Keypoints
-            <span>PCA + Wrists</span>
+            4. 3D Keypoints
+            <span>PCA for Bat Axis</span>
         </div>
 
         <div class="node phys" id="n5">
-            🧠 5. 3D Fusion
-            <span>Kalman RTS</span>
+            5. 3D Fusion
+            <span>Physics-based Smoothing</span>
         </div>
 
         <div class="node out" id="n6">
-            🚀 6. Render Trajectory
-            <span>Matplotlib + FFmpeg</span>
+            6. Render Trajectory
+            <span>3D Visualization</span>
         </div>
 
     </div>
