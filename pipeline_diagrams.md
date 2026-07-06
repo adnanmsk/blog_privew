@@ -171,6 +171,7 @@ graph TD
     linkStyle 0,1,2,3,4,5 stroke:#fff,stroke-width:2px,stroke-dasharray: 8 4;
     linkStyle 6 stroke:#ff7675,stroke-width:4px,stroke-dasharray: 10 5;
 ```
+### option 6
 ```mermaid
 flowchart TD
     %% Clean, modern color palette for standard Markdown rendering
@@ -195,4 +196,144 @@ flowchart TD
     %% Link styling designed to be visible on any Markdown background
     linkStyle 0,1,2,3,4,5 stroke:#64748b,stroke-width:2px,stroke-dasharray: 5 5
     linkStyle 6 stroke:#ef4444,stroke-width:4px
+```
+
+### Option 7: Cyberpunk Neon
+```mermaid
+flowchart TD
+    classDef prep fill:#1a1a2e,stroke:#e94560,stroke-width:2px,color:#fff,rx:8px,ry:8px
+    classDef infer fill:#1a1a2e,stroke:#0f3460,stroke-width:2px,color:#fff,rx:8px,ry:8px
+    classDef phys fill:#1a1a2e,stroke:#f9a826,stroke-width:2px,color:#fff,rx:8px,ry:8px
+    classDef out fill:#1a1a2e,stroke:#43d8c9,stroke-width:3px,color:#fff,rx:12px,ry:12px,font-weight:bold
+
+    T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Video<br><i>Grounding DINO + SAM 2</i>"]:::prep
+    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
+    S -- "Stable Frames" --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
+    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "X, Y Pixels" --> K
+    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Kalman RTS</i>"]:::phys
+    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"]:::out
+
+    linkStyle 0,1,2,3,4,5 stroke:#e94560,stroke-width:2px,stroke-dasharray: 5 5
+    linkStyle 6 stroke:#43d8c9,stroke-width:4px
+```
+
+### Option 8: Earthy Natural
+```mermaid
+flowchart TD
+    classDef prep fill:#e6eed6,stroke:#606c38,stroke-width:2px,color:#283618,rx:8px,ry:8px
+    classDef infer fill:#fefae0,stroke:#dda15e,stroke-width:2px,color:#283618,rx:8px,ry:8px
+    classDef phys fill:#faedcd,stroke:#bc6c25,stroke-width:2px,color:#283618,rx:8px,ry:8px
+    classDef out fill:#83c5be,stroke:#006d77,stroke-width:3px,color:#fff,rx:12px,ry:12px,font-weight:bold
+
+    T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Video<br><i>Grounding DINO + SAM 2</i>"]:::prep
+    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
+    S -- "Stable Frames" --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
+    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "X, Y Pixels" --> K
+    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Kalman RTS</i>"]:::phys
+    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"]:::out
+
+    linkStyle 0,1,2,3,4,5 stroke:#606c38,stroke-width:2px,stroke-dasharray: 5 5
+    linkStyle 6 stroke:#006d77,stroke-width:4px
+```
+
+### Option 9: Soft Pastel
+```mermaid
+flowchart TD
+    classDef prep fill:#ffc8dd,stroke:#ffafcc,stroke-width:2px,color:#5c4d5c,rx:8px,ry:8px
+    classDef infer fill:#bde0fe,stroke:#a2d2ff,stroke-width:2px,color:#5c4d5c,rx:8px,ry:8px
+    classDef phys fill:#cdb4db,stroke:#b492c7,stroke-width:2px,color:#5c4d5c,rx:8px,ry:8px
+    classDef out fill:#fdffb6,stroke:#ffd6a5,stroke-width:3px,color:#5c4d5c,rx:12px,ry:12px,font-weight:bold
+
+    T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Video<br><i>Grounding DINO + SAM 2</i>"]:::prep
+    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
+    S -- "Stable Frames" --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
+    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "X, Y Pixels" --> K
+    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Kalman RTS</i>"]:::phys
+    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"]:::out
+
+    linkStyle 0,1,2,3,4,5 stroke:#b492c7,stroke-width:2px,stroke-dasharray: 5 5
+    linkStyle 6 stroke:#ffd6a5,stroke-width:4px
+```
+
+### Option 10: Minimalist Monochrome
+```mermaid
+flowchart TD
+    classDef prep fill:#ffffff,stroke:#000000,stroke-width:2px,color:#000000,rx:8px,ry:8px
+    classDef infer fill:#f0f0f0,stroke:#333333,stroke-width:2px,color:#000000,rx:8px,ry:8px
+    classDef phys fill:#d0d0d0,stroke:#666666,stroke-width:2px,color:#000000,rx:8px,ry:8px
+    classDef out fill:#000000,stroke:#000000,stroke-width:3px,color:#ffffff,rx:12px,ry:12px,font-weight:bold
+
+    T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Video<br><i>Grounding DINO + SAM 2</i>"]:::prep
+    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
+    S -- "Stable Frames" --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
+    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "X, Y Pixels" --> K
+    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Kalman RTS</i>"]:::phys
+    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"]:::out
+
+    linkStyle 0,1,2,3,4,5 stroke:#000000,stroke-width:2px,stroke-dasharray: 5 5
+    linkStyle 6 stroke:#000000,stroke-width:4px
+```
+
+### Option 11: Vibrant Tech
+```mermaid
+flowchart TD
+    classDef prep fill:#e0f7fa,stroke:#00acc1,stroke-width:2px,color:#006064,rx:8px,ry:8px
+    classDef infer fill:#fff3e0,stroke:#fb8c00,stroke-width:2px,color:#e65100,rx:8px,ry:8px
+    classDef phys fill:#f3e5f5,stroke:#8e24aa,stroke-width:2px,color:#4a148c,rx:8px,ry:8px
+    classDef out fill:#e8eaf6,stroke:#3949ab,stroke-width:3px,color:#1a237e,rx:12px,ry:12px,font-weight:bold
+
+    T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Video<br><i>Grounding DINO + SAM 2</i>"]:::prep
+    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
+    S -- "Stable Frames" --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
+    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "X, Y Pixels" --> K
+    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Kalman RTS</i>"]:::phys
+    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"]:::out
+
+    linkStyle 0,1,2,3,4,5 stroke:#00acc1,stroke-width:2px,stroke-dasharray: 5 5
+    linkStyle 6 stroke:#3949ab,stroke-width:4px
+```
+
+### Option 12: Autumn Sunset
+```mermaid
+flowchart TD
+    classDef prep fill:#ffedd8,stroke:#f3c5b5,stroke-width:2px,color:#8b4513,rx:8px,ry:8px
+    classDef infer fill:#f3c5b5,stroke:#e3856b,stroke-width:2px,color:#5c2c0b,rx:8px,ry:8px
+    classDef phys fill:#e3856b,stroke:#c25437,stroke-width:2px,color:#ffffff,rx:8px,ry:8px
+    classDef out fill:#c25437,stroke:#8c3420,stroke-width:3px,color:#ffffff,rx:12px,ry:12px,font-weight:bold
+
+    T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Video<br><i>Grounding DINO + SAM 2</i>"]:::prep
+    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
+    S -- "Stable Frames" --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
+    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "X, Y Pixels" --> K
+    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Kalman RTS</i>"]:::phys
+    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"]:::out
+
+    linkStyle 0,1,2,3,4,5 stroke:#e3856b,stroke-width:2px,stroke-dasharray: 5 5
+    linkStyle 6 stroke:#8c3420,stroke-width:4px
+```
+
+### Option 13: Midnight Ocean
+```mermaid
+flowchart TD
+    classDef prep fill:#03045e,stroke:#0077b6,stroke-width:2px,color:#ffffff,rx:8px,ry:8px
+    classDef infer fill:#0077b6,stroke:#00b4d8,stroke-width:2px,color:#ffffff,rx:8px,ry:8px
+    classDef phys fill:#00b4d8,stroke:#90e0ef,stroke-width:2px,color:#03045e,rx:8px,ry:8px
+    classDef out fill:#caf0f8,stroke:#ffffff,stroke-width:3px,color:#03045e,rx:12px,ry:12px,font-weight:bold
+
+    T["Trim Video<br><i>YOLO11x + Pose</i>"]:::prep --> S["Stabilize Video<br><i>Grounding DINO + SAM 2</i>"]:::prep
+    S -- "Stable Frames" --> D["Depth Maps<br><i>Depth Anything V2</i>"]:::infer
+    S -- "Stable Frames" --> Seg["Bat Mask<br><i>SAM 3.1</i>"]:::infer
+    D -- "Z-Depth" --> K["3D Keypoints<br><i>PCA for Bat Axis</i>"]:::phys
+    Seg -- "X, Y Pixels" --> K
+    K -- "Raw 3D Points" --> F["3D Fusion<br><i>Kalman RTS</i>"]:::phys
+    F == "Smooth Trajectory" === R["Render Bat Swing Plane<br><i>Matplotlib + FFmpeg</i>"]:::out
+
+    linkStyle 0,1,2,3,4,5 stroke:#90e0ef,stroke-width:2px,stroke-dasharray: 5 5
+    linkStyle 6 stroke:#caf0f8,stroke-width:4px
 ```
