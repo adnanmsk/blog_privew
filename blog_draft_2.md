@@ -5,10 +5,10 @@
 ---
 
 <p align="center">
-  <img src="assets/hero_3d_swing_plane.gif" alt="Hero 3D Swing Plane" width="100%" />
+  <img src="assets/hero_3d_swing_plane_top.gif" alt="Hero 3D Swing Plane" width="100%" />
 </p>
 
-[Watch the full 3D Swing Plane Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/hero_3d_swing_plane.mp4)
+[Watch the full 3D Swing Plane Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/hero_3d_swing_plane_top.mp4)
 
 ## Breaking the Hardware Barrier for 3D Swing Analysis
 
