@@ -467,19 +467,18 @@ Without pitch stabilization, the sampled Z-coordinates drifted wildly between fr
 
 ---
 
-## The Full Model Stack (Zero Fine-Tuning!)
+## The Power of Zero-Shot AI
 
-One of the most impressive parts of this pipeline is that it requires **zero fine-tuning**. We didn't train a single model on a custom cricket dataset. Every single one of these massive foundation models is running completely zero-shot.
+One of the most impressive parts of this pipeline is that it requires zero fine-tuning. We didn't train a single AI model on a custom cricket dataset. Instead, we took powerful, off-the-shelf vision models and chained them together to solve a highly specialized physics problem.
 
-| Model | Parameters | Size | Role |
-|-------|-----------|------|------|
-| YOLO11x | ~57M | 115 MB | Object detection (bat, person) |
-| YOLOv8x-Pose | ~69M | 139 MB | Human pose estimation (wrists) |
-| Grounding DINO Tiny | ~170M | ~350 MB | Zero-shot text-prompted detection |
-| SAM 2 Hiera Large | ~200M | 898 MB | Promptable image segmentation |
-| SAM 3.1 Multiplex | ~1.2B | 3.5 GB | Video object segmentation |
-| Depth Anything V2 Large | ~335M | ~1.3 GB | Monocular depth estimation |
+Here is how the workload is divided across the AI stack:
 
+* **The Observers:** General object-detection models scan the frame to find the player and map their skeleton.
+* **The Trackers:** Advanced video-segmentation models lock onto the bat, following its shape and pixels through space and time.
+* **The Depth Estimator:** A relative depth model analyzes the shading and context of the 2D video to estimate exactly how far the bat is from the camera lens.
+* **The Physicist:** A mathematical filter takes all these raw AI predictions and enforces real-world physics—smoothing the arc and predicting where the bat is even when it disappears.
+
+By forcing these generalized models to collaborate, we achieved highly specific, 3D tracking without ever having to collect and label thousands of cricket videos for training.
 
 
 
