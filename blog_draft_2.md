@@ -4,7 +4,9 @@
 
 ---
 
-![Hero 3D Swing Plane](assets/hero_3d_swing_plane.gif)
+<p align="center">
+  <img src="assets/hero_3d_swing_plane.gif" alt="Hero 3D Swing Plane" width="100%" />
+</p>
 
 [Watch the full 3D Swing Plane Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/hero_3d_swing_plane.mp4)
 
@@ -157,7 +159,9 @@ To find these lines without training a custom model, we use **Grounding DINO**-a
 
 Even though Grounding DINO wasn't trained specifically on cricket pitches, it locates the white lines on the ground. Once it finds them in a single "golden frame," we feed those locations into **SAM 2** (Segment Anything Model 2). SAM 2 is designed for video; we give it a few points on the lines, and it automatically tracks and outlines the shapes of those crease lines forward and backward through the entire clip.
 
-![Pitch Stabilization Bounding Box](assets/stage2_pitch_detected.gif)
+<p align="center">
+  <img src="assets/stage2_pitch_detected.gif" alt="Pitch Stabilization Bounding Box" width="100%" />
+</p>
 
 [Watch the high-res Pitch Detection Bounding Box Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage2_pitch_detected.mp4)
 
@@ -183,7 +187,9 @@ out_frame = cv2.warpAffine(frame_copy, M, (1280, 1280))
 
 This mathematical "rubber sheet" transformation normalizes every frame. The camera movement is completely neutralized, and the pitch is locked in place. Any movement left in the video is now the true physical motion of the player and the bat.
 
-![Final Stabilized Pitch](assets/stage2_stabilized.gif)
+<p align="center">
+  <img src="assets/stage2_stabilized.gif" alt="Final Stabilized Pitch" width="100%" />
+</p>
 
 [Watch the high-res Final Stabilized Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage2_stabilized.mp4)
 
@@ -222,7 +228,9 @@ black_mask = np.all(raw_frame == 0, axis=-1)
 depth_map[black_mask] = 0.0
 ```
 
-![Depth Map Output](assets/stage3a_depth.gif)
+<p align="center">
+  <img src="assets/stage3a_depth.gif" alt="Depth Map Output" width="100%" />
+</p>
 
 [Watch the high-res Depth Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage3a_depth.mp4)
 
@@ -319,7 +327,9 @@ The endpoint of the bat's axis that is closest to this grip is classified as the
 
 Finally, to get sub-pixel accuracy, we don't just use the single furthest pixel. We take the average (center of mass) of the top 15% and bottom 15% of pixels along the axis. This prevents a single jagged, noisy pixel from causing the tracked tip to jitter! And that's it! We now have the `(x, y)` pixel coordinates of both the handle and the tip for every single frame of the swing.
 
-![PCA Handle and Tip Detection](assets/stage4_pca.gif)
+<p align="center">
+  <img src="assets/stage4_pca.gif" alt="PCA Handle and Tip Detection" width="100%" />
+</p>
 
 [Watch the high-res PCA Detection Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage4_pca.mp4)
 
