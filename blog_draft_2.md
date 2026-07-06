@@ -255,7 +255,7 @@ clean_masks = {f: bat_masks[f] & ~wkt_masks[f] for f in all_fidxs}
 
 ### Filtering with the "Wicket Zone"
 
-Even after subtraction, tiny fragments of the stumps might remain. To completely eliminate this noise, we compute a **Wicket Exclusion Zone*-a bounding box that averages the position of the stumps across all frames. 
+Even after subtraction, tiny fragments of the stumps might remain. To completely eliminate this noise, we compute a **Wicket Exclusion Zone**-a bounding box that averages the position of the stumps across all frames. 
 
 ```python
 # Create an average bounding box around all detected wicket masks
