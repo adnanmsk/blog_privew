@@ -1,6 +1,6 @@
-# 3D Cricket Bat Trajectory: Mapping the Swing Plane from Unstable 2D Video
+# Decoding Virat Kohli's Signature Flick in 3D: Mapping the Bat Swing Plane from Raw 2D Video
 
-*Extracting the precise 3D bat swing plane from a standard 2D video-no sensors, no multi-camera rigs, just AI.*
+*Extracting the precise 3D bat swing plane from standard, unstable 2D video—no sensors, no multi-camera rigs, just AI.*
 
 ---
 
@@ -8,6 +8,7 @@
   <img src="assets/hero_3d_swing_plane_top.gif" alt="Hero 3D Swing Plane" width="100%" />
 </p>
 
+[Watch the full 3D Swing Plane Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/hero_3d_swing_plane_top.mp4)
 
 ## Breaking the Hardware Barrier for 3D Swing Analysis
 
@@ -162,6 +163,7 @@ Even though this detection model wasn't trained specifically on cricket pitches,
   <img src="assets/stage2_pitch_detected.gif" alt="Pitch Stabilization Bounding Box" width="100%" />
 </p>
 
+[Watch the high-res Pitch Detection Bounding Box Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage2_pitch_detected.mp4)
 
 ### Warping the Coordinate Space
 
@@ -189,6 +191,7 @@ This mathematical "rubber sheet" transformation normalizes every frame. The came
   <img src="assets/stage2_stabilized.gif" alt="Final Stabilized Pitch" width="100%" />
 </p>
 
+[Watch the high-res Final Stabilized Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage2_stabilized.mp4)
 
 ---
 
@@ -229,6 +232,7 @@ depth_map[black_mask] = 0.0
   <img src="assets/stage3a_depth.gif" alt="Depth Map Output" width="100%" />
 </p>
 
+[Watch the high-res Depth Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage3a_depth.mp4)
 
 ---
 
@@ -277,6 +281,7 @@ This dual-session approach isn't cricket-specific. It's a general computer visio
 </p>
 
 
+[Watch the high-res 3-Panel Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage3b_subtraction.mp4)
 
 ---
 
@@ -324,6 +329,7 @@ Finally, to get sub-pixel accuracy, we don't just use the single furthest pixel.
   <img src="assets/stage4_pca.gif" alt="PCA Handle and Tip Detection" width="100%" />
 </p>
 
+[Watch the high-res PCA Detection Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage4_pca.mp4)
 
 ---
 
@@ -415,6 +421,7 @@ By rendering from three different camera angles (e.g., side-profile, and standar
 </p>
 
 
+[Watch the high-res 3D Swing Plane Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/hero_3d_swing_plane.mp4)
 
 ---
 
@@ -508,7 +515,7 @@ Ultimately, this pipeline is a blueprint for how we can use AI to pull structure
 ## References
 
 1. Ultralytics YOLO - https://docs.ultralytics.com/
-2. Segment Anything Model 2 (SAM 2) - https://github.com/facebookresearch/segment-anything-2
+2. Segment Anything Model 3 (SAM 3.1) - https://github.com/facebookresearch/sam3
 3. Depth Anything V2 - https://huggingface.co/depth-anything/Depth-Anything-V2-Large-hf
 4. Grounding DINO - https://github.com/IDEA-Research/GroundingDINO
 5. Rauch, H. E., Tung, F., and Striebel, C. T. (1965). *Maximum Likelihood Estimates of Linear Dynamic Systems.* AIAA Journal.

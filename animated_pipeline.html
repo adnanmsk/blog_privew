@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,27 +60,66 @@
         }
 
         /* Group Colors */
-        .prep { border-color: #f59e0b; box-shadow: 0 0 15px rgba(245, 158, 11, 0.2); }
-        .infer { border-color: #3b82f6; box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
-        .phys { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
-        .out { border-color: #ec4899; box-shadow: 0 0 20px rgba(236, 72, 153, 0.4); }
+        .prep {
+            border-color: #f59e0b;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+        }
+
+        .infer {
+            border-color: #3b82f6;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+        }
+
+        .phys {
+            border-color: #10b981;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+
+        .out {
+            border-color: #ec4899;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.4);
+        }
 
         /* Node Positions - PERFECTLY CENTERED (Center Line at 500px) */
-        #n1 { top: 70px; left: 410px; }
-        #n2 { top: 180px; left: 410px; }
-        
-        #n3a { top: 300px; left: 210px; }
-        #n3b { top: 300px; left: 610px; }
-        
-        #n4 { top: 420px; left: 410px; }
-        #n5 { top: 530px; left: 410px; }
-        
-        #n6 { top: 640px; left: 410px; }
+        #n1 {
+            top: 70px;
+            left: 410px;
+        }
+
+        #n2 {
+            top: 180px;
+            left: 410px;
+        }
+
+        #n3a {
+            top: 300px;
+            left: 210px;
+        }
+
+        #n3b {
+            top: 300px;
+            left: 610px;
+        }
+
+        #n4 {
+            top: 420px;
+            left: 410px;
+        }
+
+        #n5 {
+            top: 530px;
+            left: 410px;
+        }
+
+        #n6 {
+            top: 640px;
+            left: 410px;
+        }
 
         /* Animated Pulses */
         .node:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(255,255,255,0.2);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
             border-color: #fff;
         }
 
@@ -117,8 +157,13 @@
         }
 
         @keyframes dash {
-            from { stroke-dashoffset: 40; }
-            to { stroke-dashoffset: 0; }
+            from {
+                stroke-dashoffset: 40;
+            }
+
+            to {
+                stroke-dashoffset: 0;
+            }
         }
 
         /* Flow line labels styling */
@@ -141,9 +186,9 @@
             font-weight: 300;
             letter-spacing: 2px;
         }
-
     </style>
 </head>
+
 <body>
 
     <div class="pipeline-container">
@@ -168,10 +213,10 @@
         <!-- Connection Flow Labels -->
         <div class="line-label" style="top: 252px; left: 325px;">Stable Frames</div>
         <div class="line-label" style="top: 252px; left: 585px;">Stable Frames</div>
-        
+
         <div class="line-label" style="top: 382px; left: 345px;">Z-Depth</div>
         <div class="line-label" style="top: 382px; left: 575px;">X, Y Pixels</div>
-        
+
         <div class="line-label" style="top: 500px; left: 515px;">Raw 3D Points</div>
         <div class="line-label" style="top: 610px; left: 515px;">Smooth Trajectory</div>
 
@@ -214,4 +259,5 @@
     </div>
 
 </body>
+
 </html>
