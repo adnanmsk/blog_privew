@@ -272,7 +272,7 @@ This dual-session approach isn't cricket-specific. It's a general computer visio
   <img src="assets/stage3b_subtraction.gif" alt="SAM Mask Subtraction Trick" width="100%" />
 </p>
 <p align="center">
-  <i>Left: Contaminated Bat Mask &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Center: Wicket Mask &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Right: Final Clean Mask</i>
+  <i>Left: Raw Bat Mask &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Center: Wicket Mask &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; Right: Final Clean Mask</i>
 </p>
 
 [Watch the high-res 3-Panel Video](https://github.com/adnanmsk/blog_privew/raw/main/assets/stage3b_subtraction.mp4)
