@@ -65,16 +65,16 @@
         .out { border-color: #ec4899; box-shadow: 0 0 20px rgba(236, 72, 153, 0.4); }
 
         /* Node Positions - PERFECTLY CENTERED (Center Line at 500px) */
-        #n1 { top: 50px; left: 410px; }
-        #n2 { top: 170px; left: 410px; }
+        #n1 { top: 40px; left: 410px; }
+        #n2 { top: 160px; left: 410px; }
         
-        #n3a { top: 290px; left: 210px; }
-        #n3b { top: 290px; left: 610px; }
+        #n3a { top: 280px; left: 210px; }
+        #n3b { top: 280px; left: 610px; }
         
-        #n4 { top: 410px; left: 410px; }
-        #n5 { top: 510px; left: 410px; }
+        #n4 { top: 400px; left: 410px; }
+        #n5 { top: 520px; left: 410px; }
         
-        #n6 { top: 510px; left: 680px; }
+        #n6 { top: 520px; left: 680px; }
 
         /* Animated Pulses */
         .node:hover {
@@ -121,62 +121,17 @@
             to { stroke-dashoffset: 0; }
         }
 
-        /* Data Packets (Glowing Orbs moving along lines) */
-        .packet {
-            width: 10px;
-            height: 10px;
-            background: #fff;
-            border-radius: 50%;
+        /* Flow line labels styling */
+        .line-label {
             position: absolute;
-            z-index: 5;
-            transform: translate(-50%, -50%);
-        }
-
-        /* Packet Animations using CSS offset-path (Perfect Alignment!) */
-        .p1 {
-            offset-path: path('M 500 120 L 500 170');
-            animation: move-packet 1s infinite linear;
-            box-shadow: 0 0 10px #fff, 0 0 20px #00f5d4;
-        }
-        .p2a {
-            offset-path: path('M 500 240 Q 500 265 300 290');
-            animation: move-packet 1.5s infinite linear;
-            box-shadow: 0 0 10px #fff, 0 0 20px #f59e0b;
-        }
-        .p2b {
-            offset-path: path('M 500 240 Q 500 265 700 290');
-            animation: move-packet 1.5s infinite linear;
-            box-shadow: 0 0 10px #fff, 0 0 20px #3b82f6;
-        }
-        .p3a {
-            offset-path: path('M 300 360 Q 300 385 500 410');
-            animation: move-packet 1.5s infinite linear;
-            box-shadow: 0 0 10px #fff, 0 0 20px #10b981;
-        }
-        .p3b {
-            offset-path: path('M 700 360 Q 700 385 500 410');
-            animation: move-packet 1.5s infinite linear;
-            box-shadow: 0 0 10px #fff, 0 0 20px #10b981;
-        }
-        .p4 {
-            offset-path: path('M 500 480 L 500 510');
-            animation: move-packet 0.8s infinite linear;
-            box-shadow: 0 0 10px #fff, 0 0 20px #ec4899;
-        }
-        .p5 {
-            offset-path: path('M 590 545 L 680 545');
-            animation: move-packet 1.2s infinite linear;
-            background: #ec4899;
-            box-shadow: 0 0 10px #fff, 0 0 30px #ec4899;
-        }
-
-        @keyframes move-packet {
-            0% {
-                offset-distance: 0%;
-            }
-            100% {
-                offset-distance: 100%;
-            }
+            font-size: 11px;
+            color: #9ca3af;
+            font-weight: 500;
+            pointer-events: none;
+            z-index: 2;
+            background: rgba(17, 24, 39, 0.8);
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
         h2 {
@@ -197,27 +152,28 @@
         <!-- Background SVG Lines -->
         <svg>
             <!-- 1 to 2 -->
-            <path d="M 500 120 L 500 170" class="line animated-line-slow" />
+            <path d="M 500 110 L 500 160" class="line animated-line-slow" />
             <!-- 2 to 3a and 3b -->
-            <path d="M 500 240 Q 500 265 300 290" class="line animated-line" />
-            <path d="M 500 240 Q 500 265 700 290" class="line animated-line" />
+            <path d="M 500 230 Q 500 255 300 280" class="line animated-line" />
+            <path d="M 500 230 Q 500 255 700 280" class="line animated-line" />
             <!-- 3a and 3b to 4 -->
-            <path d="M 300 360 Q 300 385 500 410" class="line animated-line" />
-            <path d="M 700 360 Q 700 385 500 410" class="line animated-line" />
+            <path d="M 300 350 Q 300 375 500 400" class="line animated-line" />
+            <path d="M 700 350 Q 700 375 500 400" class="line animated-line" />
             <!-- 4 to 5 -->
-            <path d="M 500 480 L 500 510" class="line animated-line" />
+            <path d="M 500 470 L 500 520" class="line animated-line" />
             <!-- 5 to 6 -->
-            <path d="M 590 545 L 680 545" class="line animated-line-fast" />
+            <path d="M 590 555 L 680 555" class="line animated-line-fast" />
         </svg>
 
-        <!-- Glowing Packets -->
-        <div class="packet p1"></div>
-        <div class="packet p2a"></div>
-        <div class="packet p2b"></div>
-        <div class="packet p3a"></div>
-        <div class="packet p3b"></div>
-        <div class="packet p4"></div>
-        <div class="packet p5"></div>
+        <!-- Connection Flow Labels -->
+        <div class="line-label" style="top: 232px; left: 325px;">Stable Frames</div>
+        <div class="line-label" style="top: 232px; left: 585px;">Stable Frames</div>
+        
+        <div class="line-label" style="top: 362px; left: 345px;">Z-Depth</div>
+        <div class="line-label" style="top: 362px; left: 575px;">X, Y Pixels</div>
+        
+        <div class="line-label" style="top: 483px; left: 450px;">Raw 3D Points</div>
+        <div class="line-label" style="top: 544px; left: 588px;">Smooth Trajectory</div>
 
         <!-- Nodes -->
         <div class="node prep" id="n1">
